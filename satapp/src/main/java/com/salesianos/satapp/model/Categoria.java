@@ -1,4 +1,4 @@
 package com.salesianos.satapp.model;
 
-public class Categoría {
+public class Categoria {
 }

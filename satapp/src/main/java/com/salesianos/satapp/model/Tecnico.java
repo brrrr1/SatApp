@@ -1,5 +1,6 @@
 package com.salesianos.satapp.model;
 
+import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.MappedSuperclass;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
@@ -11,6 +12,7 @@ import lombok.experimental.SuperBuilder;
 @AllArgsConstructor
 @NoArgsConstructor
 @SuperBuilder
+@DiscriminatorValue("t")
 public class Tecnico extends Usuario{
 
 

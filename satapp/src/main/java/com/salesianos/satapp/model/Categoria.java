@@ -1,12 +1,10 @@
 package com.salesianos.satapp.model;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.MappedSuperclass;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @MappedSuperclass
@@ -26,6 +24,18 @@ public class Categoria {
     private String nombre;
 
     @OneToMany(mappedBy = "categoria")
-    private List<Incidencia> incidencias;
+    private List<Incidencia> incidencias = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "categoria_relacion_id",
+            foreignKey = @ForeignKey(name = "fk_categoria_padre_categoria"))
+    private Categoria categoriaPadre;
+
+    @OneToMany(mappedBy = "categoriaPadre",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
+    @Builder.Default
+    @ToString.Exclude
+    private List<Categoria> listaCategoriasHijas = new ArrayList<>();
 
 }

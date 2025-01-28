@@ -14,6 +14,7 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class HistoricoCursos {
 
-
+    private String cursoEscolar;
+    private String curso;
 
 }

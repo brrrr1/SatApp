@@ -14,6 +14,9 @@ import lombok.experimental.SuperBuilder;
 @SuperBuilder
 public class Personal extends Usuario{
 
-
+    private enum Tipo{
+        PROFESOR,
+        PAS
+    }
 
 }

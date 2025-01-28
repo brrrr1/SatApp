@@ -4,6 +4,8 @@ import jakarta.persistence.MappedSuperclass;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.time.LocalDateTime;
+
 @MappedSuperclass
 @Getter
 @Setter
@@ -13,4 +15,9 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class Nota {
+
+    private LocalDateTime fecha;
+    private String contenido;
+    private String autor;
+
 }

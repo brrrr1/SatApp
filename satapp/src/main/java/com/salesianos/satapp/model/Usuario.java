@@ -7,7 +7,6 @@ import lombok.experimental.SuperBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-@MappedSuperclass
 @Getter
 @Setter
 @ToString

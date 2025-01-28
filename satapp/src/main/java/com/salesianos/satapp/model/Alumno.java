@@ -4,7 +4,6 @@ import jakarta.persistence.MappedSuperclass;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-@MappedSuperclass
 @Getter
 @Setter
 @ToString
@@ -13,7 +12,6 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @SuperBuilder
 public class Alumno extends Usuario{
-
-
+    
 
 }

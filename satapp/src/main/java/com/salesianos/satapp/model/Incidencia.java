@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @MappedSuperclass
@@ -44,6 +45,6 @@ public class Incidencia {
     private Ubicacion ubicacion;
 
     @OneToMany(mappedBy = "incidencia", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Nota> notas;
+    private List<Nota> notas = new ArrayList<>();
 
 }

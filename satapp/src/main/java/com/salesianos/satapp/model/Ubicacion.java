@@ -7,6 +7,7 @@ import jakarta.persistence.OneToMany;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @MappedSuperclass
@@ -26,6 +27,6 @@ public class Ubicacion {
     private String nombre;
 
     @OneToMany(mappedBy = "ubicacion")
-    private List<Incidencia> incidencias;
+    private List<Incidencia> incidencias = new ArrayList<>();
 
 }

@@ -4,6 +4,7 @@ import com.salesianos.satapp.dto.CreateIncidenciaDto;
 import com.salesianos.satapp.model.Estado;
 import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.repository.IncidenciaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,10 +21,10 @@ public class IncidenciaService {
                 .fecha(incidenciaDto.fecha().now())
                 .titulo(incidenciaDto.titulo())
                 .descripcion(incidenciaDto.descripcion())
-                .estado(incidenciaDto.estado().ABIERTA)
-                .usuario(incidenciaDto.usuario())
+                /*.estado(incidenciaDto.estado().ABIERTA)*/
+                /*.usuario(incidenciaDto.usuario())
                 .categoria(incidenciaDto.categoria())
-                .ubicacion(incidenciaDto.ubicacion())
+                .ubicacion(incidenciaDto.ubicacion())*/
                 .build());
     }
 
@@ -39,9 +40,28 @@ public class IncidenciaService {
         incidenciaRepository.deleteById(id);
     }
 
-    public Incidencia editIncidencia(Incidencia incidencia) {
+    /*public Incidencia editIncidencia(Incidencia incidencia) {
         return incidenciaRepository.save(incidencia);
+    }*/
+
+    public Incidencia editIncidenciaUser(Incidencia incidencia, Long id) {
+        return incidenciaRepository.findById(id)
+                .map(old -> {
+                    old.setTitulo(incidencia.getTitulo());
+                    old.setDescripcion(incidencia.getDescripcion());
+                    old.setEstado(incidencia.getEstado());
+                    old.setCategoria(incidencia.getCategoria());
+                    old.setEquipo(incidencia.getEquipo());
+                    old.setUbicacion(incidencia.getUbicacion());
+
+
+                    return incidenciaRepository.save(old);
+                })
+                .orElseThrow(() -> new EntityNotFoundException("No hay incidencia con ID: "+ id));
+
     }
+
+
 
     public Incidencia cambiarEstado(Long id, Estado estado) {
         Incidencia incidencia = findById(id);

@@ -13,6 +13,7 @@ import java.util.List;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 public class Equipo {
 
@@ -23,7 +24,7 @@ public class Equipo {
     private String nombre;
     private String caracteristicas;
 
-    @OneToMany(mappedBy = "categoria")
+    @OneToMany(mappedBy = "equipo")
     private List<Incidencia> incidencias = new ArrayList<>();
 
 }

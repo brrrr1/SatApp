@@ -12,6 +12,7 @@ import java.util.List;
 @Setter
 @ToString
 @AllArgsConstructor
+@Builder
 @Entity
 public class Categoria {
 

@@ -25,7 +25,7 @@ public class Incidencia {
     private LocalDateTime fecha;
     private String titulo;
     private String descripcion;
-    private enum estado {ABIERTA, EN_PROCESO, CERRADA};
+    private Estado estado;
     private String urgencia;
 
     @ManyToOne

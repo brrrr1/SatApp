@@ -15,9 +15,6 @@ import lombok.experimental.SuperBuilder;
 @DiscriminatorValue("p")
 public class Personal extends Usuario{
 
-    private enum Tipo{
-        PROFESOR,
-        PAS
-    }
+    private Tipo tipo;
 
 }

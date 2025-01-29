@@ -7,14 +7,12 @@ import lombok.experimental.SuperBuilder;
 import java.util.ArrayList;
 import java.util.List;
 
-@MappedSuperclass
+
 @Getter
 @Setter
 @ToString
-@RequiredArgsConstructor
 @AllArgsConstructor
-@NoArgsConstructor
-@SuperBuilder
+@Entity
 public class Categoria {
 
     @Id

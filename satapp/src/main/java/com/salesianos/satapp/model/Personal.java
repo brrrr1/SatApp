@@ -1,8 +1,6 @@
 package com.salesianos.satapp.model;
 
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
@@ -16,6 +14,7 @@ import lombok.experimental.SuperBuilder;
 @DiscriminatorValue("p")
 public class Personal extends Usuario{
 
+    @Enumerated(EnumType.STRING)
     private Tipo tipo;
 
 }

@@ -6,8 +6,6 @@ import com.salesianos.satapp.model.Incidencia;
 import java.time.LocalDateTime;
 
 public record GetIncidenciaDto(
-
-
         LocalDateTime fecha,
         String titulo,
         String descripcion,

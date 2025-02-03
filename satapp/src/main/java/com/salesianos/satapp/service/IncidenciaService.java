@@ -76,7 +76,7 @@ public class IncidenciaService {
     }
 
     public List<Incidencia> getIncidenciasByFecha(LocalDateTime startDate, LocalDateTime endDate) {
-        return incidenciaRepository.findByFechaCreacionBetween(startDate, endDate);
+        return incidenciaRepository.findByFechaBetween(startDate, endDate);
     }
 
     public List<Incidencia> getIncidenciasByUsuarioAndEstado(Long usuarioId, String estado) {

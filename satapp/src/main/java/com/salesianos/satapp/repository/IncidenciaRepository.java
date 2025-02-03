@@ -26,12 +26,17 @@ public interface IncidenciaRepository extends JpaRepository<Incidencia, Long> {
            """)
     Optional<Nota> findByIdNota(Long id);
 
-    List<Incidencia> findByAlumnoId(Long alumnoId);
+    @Query("""
+    SELECT i FROM Incidencia i 
+    WHERE TYPE(i.usuario) = Alumno AND i.usuario.id = :alumnoId
+    """)
+    List<Incidencia> findByAlumnoId(@Param("alumnoId") Long alumnoId);
+
 
     @Query("""
-    SELECT i FROM Incidencia i WHERE i.fechaCreacion BETWEEN :startDate AND :endDate
+    SELECT i FROM Incidencia i WHERE i.fecha BETWEEN :startDate AND :endDate
     """)
-    List<Incidencia> findByFechaCreacionBetween(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+    List<Incidencia> findByFechaBetween(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
 
     List<Incidencia> findByUsuarioIdAndEstado(Long usuarioId, String estado);
 

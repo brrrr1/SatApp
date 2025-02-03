@@ -89,7 +89,7 @@ public class AlumnoController {
                     description = "No se ha encontrado el alumno",
                     content = @Content),
     })
-    @GetMapping
+    @GetMapping("/{id}")
     public Alumno getAlumno() {
         return alumnoService.findAlumnoById(1L);
     }

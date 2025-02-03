@@ -12,7 +12,11 @@ public record GetCategoriaDto(
 ) {
 
     public static GetCategoriaDto of(Categoria c) {
-        return new GetCategoriaDto(c.getId(), c.getNombre(), c.getCategoriaPadre().getNombre(), c.getListaCategoriasHijas().stream().map(Categoria::getNombre).toList());
+        String nombreCategoriaPadre = (c.getCategoriaPadre() != null) ? c.getCategoriaPadre().getNombre() : null;
+        List<String> listaCategoriasHijas = c.getListaCategoriasHijas().stream()
+                .map(Categoria::getNombre)
+                .toList();
+        return new GetCategoriaDto(c.getId(), c.getNombre(), nombreCategoriaPadre, listaCategoriasHijas);
     }
 
 }

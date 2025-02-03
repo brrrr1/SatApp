@@ -59,6 +59,7 @@ public class EquipoController {
         Equipo equipo = new Equipo();
         equipo.setNombre(editEquipoDto.nombre());
         equipo.setCaracteristicas(editEquipoDto.caracteristicas());
+        equipo.setUbicacion(editEquipoDto.ubicacion());
 
         Equipo savedEquipo = equipoService.save(equipo);
         return ResponseEntity.status(201).body(GetEquipoDto.of(savedEquipo));

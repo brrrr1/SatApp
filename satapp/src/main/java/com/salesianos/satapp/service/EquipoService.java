@@ -39,6 +39,7 @@ public class EquipoService {
                 .map(equipo -> {
                     equipo.setNombre(equipoActualizado.getNombre());
                     equipo.setCaracteristicas(equipoActualizado.getCaracteristicas());
+                    equipo.setUbicacion(equipoActualizado.getUbicacion());
                     return equipoRepository.save(equipo);
                 })
                 .orElseThrow(() -> new RuntimeException("Equipo no encontrado"));

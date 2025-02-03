@@ -7,7 +7,7 @@ public record GetEquipoDto(
         Long id,
         String nombre,
         String caracteristicas,
-        GetUbicacionDto ubicacion  // Incluir la ubicación
+        GetUbicacionDto ubicacion
 ) {
     public static GetEquipoDto of(Equipo equipo) {
         return new GetEquipoDto(

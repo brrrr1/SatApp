@@ -1,11 +1,50 @@
 package com.salesianos.satapp.service;
 
+import com.salesianos.satapp.dto.CreateCategoriaDto;
+import com.salesianos.satapp.dto.CreateIncidenciaDto;
+import com.salesianos.satapp.model.Categoria;
+import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.repository.CategoriaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class CategoriaService {
+
+    private final CategoriaRepository categoriaRepository;
+
+    public List<Categoria> findAll() {
+        List <Categoria> results = categoriaRepository.findAll();
+
+        if (results.isEmpty())
+            throw new EntityNotFoundException("No se ha encontrado ninguna categoria");
+        return results;
+    }
+
+    public Optional<Categoria> findById(Long id) {
+        Optional <Categoria> resultsOp = categoriaRepository.findById(id);
+
+        if (resultsOp.isEmpty())
+            throw new EntityNotFoundException("No se han encontrado categorias con ese id");
+        return resultsOp;
+    }
+
+    public Categoria save(CreateCategoriaDto c) {
+        return categoriaRepository.save(Categoria.builder()
+                .id(c.id())
+                .nombre(c.nombre())
+                .categoriaPadre(c.categoriaPadre())
+                .listaCategoriasHijas(c.listaCategoriasHijas())
+                .build());
+    }
+
+    public void deleteById(Long id) {
+        categoriaRepository.deleteById(id);
+    }
 
 }

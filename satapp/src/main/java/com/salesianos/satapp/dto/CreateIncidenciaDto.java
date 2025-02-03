@@ -14,4 +14,18 @@ public record CreateIncidenciaDto(
         Categoria categoria,
         Ubicacion ubicacion*/
 ) {
+
+    public static CreateIncidenciaDto of(Incidencia i) {
+        return new CreateIncidenciaDto(
+                i.getFecha(),
+                i.getTitulo(),
+                i.getDescripcion(),
+                /*i.getEstado(),*/
+                i.getUrgencia()
+                /*i.getUsuario(),
+                i.getCategoria(),
+                i.getUbicacion()*/
+        );
+    }
+
 }

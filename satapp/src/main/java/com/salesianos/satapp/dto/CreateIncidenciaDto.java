@@ -11,13 +11,13 @@ public record CreateIncidenciaDto(
         Estado estado,
         String urgencia,
         Usuario usuario,
-        Categoria categoria,
+        /*Categoria categoria,*/
         Ubicacion ubicacion
 ) {
 
 
     public static CreateIncidenciaDto to(Incidencia incidencia) {
-        return new CreateIncidenciaDto(incidencia.getFecha(), incidencia.getTitulo(), incidencia.getDescripcion(), incidencia.getEstado(), incidencia.getUrgencia(), incidencia.getUsuario(), incidencia.getCategoria(), incidencia.getUbicacion());
+        return new CreateIncidenciaDto(incidencia.getFecha(), incidencia.getTitulo(), incidencia.getDescripcion(), incidencia.getEstado(), incidencia.getUrgencia(), incidencia.getUsuario()/*, incidencia.getCategoria()*/, incidencia.getUbicacion());
     }
 
 }

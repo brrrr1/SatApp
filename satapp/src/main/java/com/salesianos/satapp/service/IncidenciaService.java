@@ -22,10 +22,10 @@ public class IncidenciaService {
                 .fecha(incidenciaDto.fecha().now())
                 .titulo(incidenciaDto.titulo())
                 .descripcion(incidenciaDto.descripcion())
-                /*.estado(incidenciaDto.estado().ABIERTA)*/
-                /*.usuario(incidenciaDto.usuario())
-                .categoria(incidenciaDto.categoria())
-                .ubicacion(incidenciaDto.ubicacion())*/
+                .estado(incidenciaDto.estado().ABIERTA)
+                .usuario(incidenciaDto.usuario())
+                /*.categoria(incidenciaDto.categoria())*/
+                .ubicacion(incidenciaDto.ubicacion())
                 .build());
     }
 

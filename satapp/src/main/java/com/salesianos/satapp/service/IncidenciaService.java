@@ -8,6 +8,7 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -67,6 +68,19 @@ public class IncidenciaService {
         Incidencia incidencia = findById(id);
         incidencia.setEstado(estado);
         return incidenciaRepository.save(incidencia);
+    }
+
+
+    public List<Incidencia> getIncidenciasByAlumno(Long alumnoId) {
+        return incidenciaRepository.findByAlumnoId(alumnoId);
+    }
+
+    public List<Incidencia> getIncidenciasByFecha(LocalDateTime startDate, LocalDateTime endDate) {
+        return incidenciaRepository.findByFechaCreacionBetween(startDate, endDate);
+    }
+
+    public List<Incidencia> getIncidenciasByUsuarioAndEstado(Long usuarioId, String estado) {
+        return incidenciaRepository.findByUsuarioIdAndEstado(usuarioId, estado);
     }
 
 }

@@ -4,7 +4,9 @@ import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.model.Nota;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,5 +25,16 @@ public interface IncidenciaRepository extends JpaRepository<Incidencia, Long> {
         WHERE n.id = ?1
            """)
     Optional<Nota> findByIdNota(Long id);
+
+    List<Incidencia> findByAlumnoId(Long alumnoId);
+
+    @Query("""
+    SELECT i FROM Incidencia i WHERE i.fechaCreacion BETWEEN :startDate AND :endDate
+    """)
+    List<Incidencia> findByFechaCreacionBetween(@Param("startDate") LocalDateTime startDate, @Param("endDate") LocalDateTime endDate);
+
+    List<Incidencia> findByUsuarioIdAndEstado(Long usuarioId, String estado);
+
+
 
 }

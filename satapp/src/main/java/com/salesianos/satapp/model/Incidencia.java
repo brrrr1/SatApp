@@ -23,6 +23,7 @@ public class Incidencia {
     @GeneratedValue
     private Long id;
 
+    @Column(name = "fecha_creacion")
     private LocalDateTime fecha;
     private String titulo;
     private String descripcion;

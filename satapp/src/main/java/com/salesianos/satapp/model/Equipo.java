@@ -24,6 +24,10 @@ public class Equipo {
     private String nombre;
     private String caracteristicas;
 
+    @ManyToOne
+    @JoinColumn(name = "ubicacion_id")
+    private Ubicacion ubicacion;
+
     @OneToMany(mappedBy = "equipo")
     private List<Incidencia> incidencias = new ArrayList<>();
 

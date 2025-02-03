@@ -2,7 +2,6 @@ package com.salesianos.satapp.service;
 
 import com.salesianos.satapp.model.Equipo;
 import com.salesianos.satapp.repository.EquipoRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,18 +14,34 @@ public class EquipoService {
 
     private final EquipoRepository equipoRepository;
 
-    public List <Equipo> findAll(){
-        List<Equipo> results = equipoRepository.findAll();
-        if (results.isEmpty())
-            throw new EntityNotFoundException("No existen equipos");
-        return results;
+    public List<Equipo> findAll() {
+        return equipoRepository.findAll();
     }
 
-    public Optional<Equipo> findById(Long id){
-        Optional <Equipo> resultsOp = equipoRepository.findById(id);
-        if (resultsOp.isEmpty())
-            throw new EntityNotFoundException("No existen equipos para ese id");
-        return resultsOp;
+    public Optional<Equipo> findById(Long id) {
+        return equipoRepository.findById(id);
     }
 
+    public Equipo save(Equipo equipo) {
+        return equipoRepository.save(equipo);
+    }
+
+    public void deleteById(Long id) {
+        if (equipoRepository.existsById(id)) {
+            equipoRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Equipo no encontrado");
+        }
+    }
+
+    public Equipo update(Long id, Equipo equipoActualizado) {
+        return equipoRepository.findById(id)
+                .map(equipo -> {
+                    equipo.setNombre(equipoActualizado.getNombre());
+                    equipo.setCaracteristicas(equipoActualizado.getCaracteristicas());
+                    equipo.setUbicacion(equipoActualizado.getUbicacion());
+                    return equipoRepository.save(equipo);
+                })
+                .orElseThrow(() -> new RuntimeException("Equipo no encontrado"));
+    }
 }

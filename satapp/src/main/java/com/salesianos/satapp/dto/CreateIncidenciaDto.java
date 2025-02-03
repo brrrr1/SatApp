@@ -8,24 +8,15 @@ public record CreateIncidenciaDto(
         LocalDateTime fecha,
         String titulo,
         String descripcion,
-        /*Estado estado,*/
-        String urgencia
-        /*Usuario usuario,
-        Categoria categoria,
-        Ubicacion ubicacion*/
+        Estado estado,
+        String urgencia,
+        Usuario usuario,
+        /*Categoria categoria,*/
+        Ubicacion ubicacion
 ) {
 
-    public static CreateIncidenciaDto of(Incidencia i) {
-        return new CreateIncidenciaDto(
-                i.getFecha(),
-                i.getTitulo(),
-                i.getDescripcion(),
-                /*i.getEstado(),*/
-                i.getUrgencia()
-                /*i.getUsuario(),
-                i.getCategoria(),
-                i.getUbicacion()*/
-        );
+    public static CreateIncidenciaDto to(Incidencia incidencia) {
+        return new CreateIncidenciaDto(incidencia.getFecha(), incidencia.getTitulo(), incidencia.getDescripcion(), incidencia.getEstado(), incidencia.getUrgencia(), incidencia.getUsuario()/*, incidencia.getCategoria()*/, incidencia.getUbicacion());
     }
 
 }

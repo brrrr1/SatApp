@@ -25,4 +25,6 @@ public class Ubicacion {
     @OneToMany(mappedBy = "ubicacion")
     private List<Incidencia> incidencias = new ArrayList<>();
 
+    @OneToMany(mappedBy = "ubicacion")
+    private List<Equipo> equipos = new ArrayList<>(); // Relación con equipos
 }

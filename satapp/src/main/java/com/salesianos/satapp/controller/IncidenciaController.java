@@ -95,7 +95,7 @@ public class IncidenciaController {
                     content = @Content),
     })
     @GetMapping("/{id}")
-    public GetIncidenciaDto getIncidencia(@PathVariable Long id) {
+    public GetIncidenciaDto getById(@PathVariable Long id) {
         return GetIncidenciaDto.of(incidenciaService.findById(id));
     }
 

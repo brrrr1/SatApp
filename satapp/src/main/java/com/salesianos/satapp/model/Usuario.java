@@ -22,6 +22,7 @@ public class Usuario {
     @GeneratedValue
     private long id;
 
+    private String nombre;
     private String username;
     private String password;
     private String email;

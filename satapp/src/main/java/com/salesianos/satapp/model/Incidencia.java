@@ -6,9 +6,7 @@ import lombok.experimental.SuperBuilder;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 @Getter
@@ -36,6 +34,12 @@ public class Incidencia {
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario usuario;
+
+    @ManyToMany(mappedBy = "incidenciasAsignadas", fetch = FetchType.EAGER)
+    @Builder.Default
+    @Setter(AccessLevel.NONE)
+    @ToString.Exclude
+    private Set<Tecnico> tecnicos = new HashSet<>();
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")

@@ -8,13 +8,13 @@ import java.util.List;
 public record GetUbicacionDto(
         Long id,
         String nombre,
-        List<Equipo> equipos
+        List<GetEquipoSinUbiDto> equipos
 ) {
     public static GetUbicacionDto of(Ubicacion ubicacion) {
         return new GetUbicacionDto(
                 ubicacion.getId(),
                 ubicacion.getNombre(),
-                ubicacion.getEquipos()
+                ubicacion.getEquipos().stream().map(GetEquipoSinUbiDto::of).toList()
         );
     }
 }

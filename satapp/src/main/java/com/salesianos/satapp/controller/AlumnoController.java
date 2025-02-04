@@ -23,7 +23,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/alumno/")
 @RequiredArgsConstructor
-@Tag(name = "Alumno", description = "El controlador de alumnod, para poder realizar todas las operaciones de gestión")
+@Tag(name = "Alumno", description = "El controlador de alumnos, para poder realizar todas las operaciones de gestión")
 public class AlumnoController {
 
     private final UsuarioService alumnoService;
@@ -101,6 +101,17 @@ public class AlumnoController {
                     content = { @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetAlumnoDto.class)),
                             examples = {@ExampleObject(
+                                    value = """
+                                                 {
+                                                               "nombre": "Cristiano Ronaldo",
+                                                               "username": "cr7",
+                                                               "email": "cr7@gmail.com",
+                                                                "password": "password123",
+                                                                "role": "ALUMNO",
+                                                                "historicoCursos": []
+                                                 }
+                                            """
+
                             )}
                     )}),
             @ApiResponse(responseCode = "400",

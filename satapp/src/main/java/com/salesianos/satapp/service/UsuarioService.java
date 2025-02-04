@@ -2,8 +2,12 @@ package com.salesianos.satapp.service;
 
 import com.salesianos.satapp.dto.EditAlumnoDto;
 import com.salesianos.satapp.dto.EditHistoricoCursosDto;
+import com.salesianos.satapp.dto.EditUsuarioDto;
 import com.salesianos.satapp.model.Alumno;
 import com.salesianos.satapp.model.HistoricoCursos;
+import com.salesianos.satapp.model.Incidencia;
+import com.salesianos.satapp.model.Usuario;
+import com.salesianos.satapp.repository.IncidenciaRepository;
 import com.salesianos.satapp.repository.UsuarioRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -11,53 +15,42 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class UsuarioService {
+    private final UsuarioRepository usuarioRepository;
 
-    private final UsuarioRepository alumnoRepository;
 
-
-    @Transactional
-    public List<Alumno> findAllAlumnos() {
-        List<Alumno> result = alumnoRepository.findAllCourses();
-
-        if (result.isEmpty()) {
-            throw new EntityNotFoundException("No se encontraron alumnos");
-        } else {
-            return result;
-        }
-    }
-
-    public Alumno findAlumnoById(Long id) {
-        Alumno result = alumnoRepository
-                .findByIdCourse(id)
-                .orElseThrow(() -> new EntityNotFoundException("Alumno no encontrado"));
+    public List<Usuario> findAll(){
+        List<Usuario> result = usuarioRepository.findAll();
+        if(result.isEmpty())
+            throw new EntityNotFoundException("No hay usuarios con esos criterios de busqueda");
         return result;
     }
 
-    public Alumno saveAlumno(EditAlumnoDto editAlumnoDto) {
-        return alumnoRepository.save(Alumno.builder()
-                .nombre(editAlumnoDto.nombre())
-                .email(editAlumnoDto.email())
-                .role(editAlumnoDto.role())
-                .password(editAlumnoDto.password())
-                .username(editAlumnoDto.username())
-                .historicoCursos(editAlumnoDto.historicoCursos())
+    public Usuario findById(Long id) {
+        Optional<Usuario> result = usuarioRepository.findById(id);
+        if(result.isEmpty())
+            throw new EntityNotFoundException("No se encontraron usuarios con ese id");
+        else {
+            return result.get();
+        }
+    }
+
+    public Usuario save(EditUsuarioDto nuevo) {
+        return usuarioRepository.save(Usuario.builder()
+                .username(nuevo.username())
+                .password(nuevo.password())
+                .email(nuevo.email())
+                .role(nuevo.role())
                 .build());
     }
 
 
-    public HistoricoCursos saveHistoricoCurso(Long alumnoId, EditHistoricoCursosDto editHistoricoDto) {
-        Alumno alumno = findAlumnoById(alumnoId);
-        HistoricoCursos historicoCursos = HistoricoCursos.builder()
-                .curso(editHistoricoDto.curso())
-                .cursoEscolar(editHistoricoDto.cursoEscolar())
-                .alumno(alumno)
-                .build();
-        alumno.getHistoricoCursos().add(historicoCursos);
-        alumnoRepository.save(alumno);
-        return historicoCursos;
+    public void delete(Long id) {
+        usuarioRepository.deleteById(id);
     }
+
 }

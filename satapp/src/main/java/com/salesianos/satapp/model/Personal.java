@@ -1,20 +1,20 @@
 package com.salesianos.satapp.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 @Getter
 @Setter
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity
+@NoArgsConstructor
+@AllArgsConstructor
 @SuperBuilder
-@DiscriminatorValue("p")
 public class Personal extends Usuario{
 
     @Enumerated(EnumType.STRING)
     private Tipo tipo;
-
 }

@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,7 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/alumno/")
 @RequiredArgsConstructor
-@Tag(name = "Alumno", description = "El controlador de alumnod, para poder realizar todas las operaciones de gestión")
+@Tag(name = "Alumno", description = "El controlador de alumnos, para poder realizar todas las operaciones de gestión")
 public class AlumnoController {
 
     private final UsuarioService alumnoService;
@@ -66,7 +67,7 @@ public class AlumnoController {
         return alumnoService.findAllAlumnos().stream().map(GetAlumnoDto::of).toList();
     }
 
-    @Operation(summary = "Obtiene un alumno")
+    /*@Operation(summary = "Obtiene un alumno")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Se ha encontrado el alumno",
@@ -89,10 +90,15 @@ public class AlumnoController {
                     description = "No se ha encontrado el alumno",
                     content = @Content),
     })
-    @GetMapping("/{id}")
-    public Alumno getAlumno() {
-        return alumnoService.findAlumnoById(1L);
-    }
+    @GetMapping("/alumno/{id}")
+    public ResponseEntity<Alumno> getAlumno(@PathVariable Long id) {
+        Alumno alumno = alumnoService.findAlumnoById(id);
+        if (alumno == null) {
+            return ResponseEntity.notFound().build(); // Devuelve 404 si no se encuentra
+        }
+        return ResponseEntity.ok(alumno);
+    }*/
+
 
     @Operation(summary = "Crea un nuevo alumno")
     @ApiResponses(value = {

@@ -8,14 +8,15 @@ public record GetCategoriaDto(
         Long id,
         String nombre,
         String nombreCategoriaPadre,
-        List<String> listaCategoriasHijas
+        List<GetCategoriaHijaDto> listaCategoriasHijas
 ) {
 
     public static GetCategoriaDto of(Categoria c) {
         String nombreCategoriaPadre = (c.getCategoriaPadre() != null) ? c.getCategoriaPadre().getNombre() : null;
-        List<String> listaCategoriasHijas = c.getListaCategoriasHijas().stream()
-                .map(Categoria::getNombre)
+        List<GetCategoriaHijaDto> listaCategoriasHijas = c.getListaCategoriasHijas().stream()
+                .map(GetCategoriaHijaDto::of)
                 .toList();
+
         return new GetCategoriaDto(c.getId(), c.getNombre(), nombreCategoriaPadre, listaCategoriasHijas);
     }
 

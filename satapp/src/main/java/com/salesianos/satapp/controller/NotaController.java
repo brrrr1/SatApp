@@ -35,14 +35,9 @@ public class NotaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(GetNotaDto.of(notaService.saveNota(incidenciaId, nota)));
     }
 
-    @PutMapping("/{notaId}/{incidenciaId}")
-    public ResponseEntity<Nota> editNota(@PathVariable Long notaId, @RequestBody CreateNotaDto nota, @PathVariable Long incidenciaId) {
-        return ResponseEntity.status(201).body(notaService.update(notaId, nota, incidenciaId));
+    @PutMapping("/{notaId}")
+    public GetNotaDto editNota(@PathVariable Long notaId, @RequestBody CreateNotaDto nota) {
+        return GetNotaDto.of(notaService.update(notaId, nota));
     }
 
-    @DeleteMapping("/{notaId}/{incidenciaId}")
-    public ResponseEntity<?> deleteNota(@PathVariable Long notaId, @PathVariable Long incidenciaId) {
-        notaService.deleteById(notaId);
-        return ResponseEntity.noContent().build();
-    }
 }

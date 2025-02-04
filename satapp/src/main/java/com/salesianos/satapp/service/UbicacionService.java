@@ -26,6 +26,7 @@ public class UbicacionService {
     public Ubicacion save(CreateUbicacionDto ubicacion) {
         return ubicacionRepository.save(Ubicacion.builder()
                 .nombre(ubicacion.nombre())
+                //.equipos(ubicacion.equipos())
                 .build());
     }
 

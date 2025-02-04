@@ -5,6 +5,7 @@ import lombok.*;
 import lombok.experimental.SuperBuilder;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
@@ -15,10 +16,14 @@ import java.util.Objects;
 @NoArgsConstructor
 @Builder
 @Entity
+@IdClass(NotaPK.class)
 public class Nota {
 
     @Id
-    private LocalDateTime fecha;
+    @GeneratedValue
+    private Long id;
+
+    private LocalDate fecha;
     private String contenido;
     private String autor;
 

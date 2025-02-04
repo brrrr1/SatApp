@@ -11,7 +11,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -41,7 +43,7 @@ public class NotaService {
                 .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado la incidencia"));
 
         Nota nota = Nota.builder()
-                .fecha(java.time.LocalDateTime.now())
+                .fecha(LocalDate.from(notaNueva.fecha()))
                 .contenido(notaNueva.contenido())
                 .autor(notaNueva.autor())
                 .incidencia(incidencia)
@@ -54,25 +56,21 @@ public class NotaService {
         return nota;
     }
 
-    public Nota update(Long notaId, CreateNotaDto notaNueva, Long incidenciaId) {
-            Incidencia incidencia = incidenciaRepository.findById(incidenciaId)
-                    .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado la incidencia"));
+    public Nota update(Long notaId, CreateNotaDto notaNueva) {
+        Optional<Nota> nota = incidenciaRepository.findByIdNota(notaId);
 
-            Nota nota = findNotaById(notaId);
+        if (nota.isEmpty()) {
+            throw new EntityNotFoundException("No se ha encontrado una nota con ese id");
+        }
 
-            nota.setContenido(notaNueva.contenido());
-            nota.setAutor(notaNueva.autor());
+        nota.get().setAutor(notaNueva.autor());
+        nota.get().setFecha(LocalDate.from(notaNueva.fecha()));
+        nota.get().setContenido(notaNueva.contenido());
+        nota.get().setIncidencia(nota.get().getIncidencia());
 
-            incidenciaRepository.save(incidencia);
+        incidenciaRepository.save(nota.get().getIncidencia());
 
-            return nota;
-    }
-
-    public void deleteById(Long id) {
-        Nota nota = findNotaById(id);
-        Incidencia incidencia = nota.getIncidencia();
-        incidencia.removeNota(nota);
-        incidenciaRepository.save(incidencia);
+        return nota.get();
     }
 
 }

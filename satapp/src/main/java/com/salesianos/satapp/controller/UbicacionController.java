@@ -1,5 +1,6 @@
 package com.salesianos.satapp.controller;
 
+import com.salesianos.satapp.dto.CreateUbicacionDto;
 import com.salesianos.satapp.dto.GetUbicacionDto;
 import com.salesianos.satapp.dto.EditEquipoDto;
 import com.salesianos.satapp.model.Ubicacion;
@@ -54,8 +55,15 @@ public class UbicacionController {
             @ApiResponse(responseCode = "201", description = "Ubicación creada",
                     content = @Content(schema = @Schema(implementation = GetUbicacionDto.class)))})
     @PostMapping
-    public ResponseEntity<GetUbicacionDto> create(@RequestBody Ubicacion ubicacion) {
+    public ResponseEntity<GetUbicacionDto> create(@RequestBody CreateUbicacionDto createUbicacionDto) {
+
+        Ubicacion ubicacion = new Ubicacion();
+        ubicacion.setNombre(createUbicacionDto.nombre());
+
+
         Ubicacion savedUbicacion = ubicacionService.save(ubicacion);
+
+
         return ResponseEntity.status(201).body(GetUbicacionDto.of(savedUbicacion));
     }
 

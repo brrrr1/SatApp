@@ -17,6 +17,8 @@ public record GetIncidenciaDto(
         Estado estado,
         String urgencia,
         Usuario usuario,
+        GetEquipoSinUbiDto equipo,
+        GetUbicacionSinEquipoDto ubicacion,
         List<GetNotaDto> notas
 ) {
 
@@ -28,6 +30,8 @@ public record GetIncidenciaDto(
                 incidencia.getEstado(),
                 incidencia.getUrgencia(),
                 incidencia.getUsuario(),
+                GetEquipoSinUbiDto.of(incidencia.getEquipo()),
+                GetUbicacionSinEquipoDto.of(incidencia.getUbicacion()),
                 incidencia.getNotas().stream().map(GetNotaDto::of).toList()
         );
     }

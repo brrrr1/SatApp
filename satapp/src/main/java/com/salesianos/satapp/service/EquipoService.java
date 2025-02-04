@@ -2,9 +2,11 @@ package com.salesianos.satapp.service;
 
 import com.salesianos.satapp.dto.CreateCategoriaDto;
 import com.salesianos.satapp.dto.EditEquipoDto;
+import com.salesianos.satapp.error.EquipoNotFoundException;
 import com.salesianos.satapp.model.Categoria;
 import com.salesianos.satapp.model.Equipo;
 import com.salesianos.satapp.repository.EquipoRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -37,7 +39,7 @@ public class EquipoService {
         if (equipoRepository.existsById(id)) {
             equipoRepository.deleteById(id);
         } else {
-            throw new RuntimeException("Equipo no encontrado");
+            throw new EquipoNotFoundException("No se ha encontrado ningún equipo con ese id");
         }
     }
 
@@ -49,6 +51,6 @@ public class EquipoService {
                     equipo.setUbicacion(equipoActualizado.ubicacion());
                     return equipoRepository.save(equipo);
                 })
-                .orElseThrow(() -> new RuntimeException("Equipo no encontrado"));
+                .orElseThrow(() -> new EquipoNotFoundException("No se ha encontrado ningún equipo con ese id"));
     }
 }

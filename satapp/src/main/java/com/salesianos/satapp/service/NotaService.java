@@ -2,6 +2,7 @@ package com.salesianos.satapp.service;
 
 import com.salesianos.satapp.dto.CreateCategoriaDto;
 import com.salesianos.satapp.dto.CreateNotaDto;
+import com.salesianos.satapp.error.NotaNotFoundException;
 import com.salesianos.satapp.model.Categoria;
 import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.model.Nota;
@@ -26,7 +27,7 @@ public class NotaService {
         List<Nota> notas = incidenciaRepository.findAllNotas();
 
         if(notas.isEmpty()) {
-            throw new EntityNotFoundException("No se han encontrado notas");
+            throw new NotaNotFoundException("No se han encontrado notas");
         }
 
         return notas;
@@ -34,13 +35,13 @@ public class NotaService {
     }
 
     public Nota findNotaById(Long id) {
-        return incidenciaRepository.findByIdNota(id).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado la nota"));
+        return incidenciaRepository.findByIdNota(id).orElseThrow(() -> new NotaNotFoundException("No se ha encontrado una nota con ese id"));
     }
 
     public Nota saveNota(Long incidenciaId, CreateNotaDto notaNueva) {
 
         Incidencia incidencia = incidenciaRepository.findById(incidenciaId)
-                .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado la incidencia"));
+                .orElseThrow(() -> new NotaNotFoundException("No se ha encontrado una incidencia con ese id"));
 
         Nota nota = Nota.builder()
                 .fecha(LocalDate.from(notaNueva.fecha()))
@@ -60,7 +61,7 @@ public class NotaService {
         Optional<Nota> nota = incidenciaRepository.findByIdNota(notaId);
 
         if (nota.isEmpty()) {
-            throw new EntityNotFoundException("No se ha encontrado una nota con ese id");
+            throw new NotaNotFoundException("No se ha encontrado una nota con ese id");
         }
 
         nota.get().setAutor(notaNueva.autor());

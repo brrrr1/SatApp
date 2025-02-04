@@ -1,6 +1,8 @@
 package com.salesianos.satapp.service;
 
 import com.salesianos.satapp.dto.CreateUbicacionDto;
+import com.salesianos.satapp.error.NotaNotFoundException;
+import com.salesianos.satapp.error.UbicacionNotFoundException;
 import com.salesianos.satapp.model.Ubicacion;
 import com.salesianos.satapp.repository.UbicacionRepository;
 import lombok.RequiredArgsConstructor;
@@ -34,7 +36,7 @@ public class UbicacionService {
         if (ubicacionRepository.existsById(id)) {
             ubicacionRepository.deleteById(id);
         } else {
-            throw new RuntimeException("Ubicación no encontrada");
+            throw new UbicacionNotFoundException("Ubicación no encontrada");
         }
     }
 
@@ -45,6 +47,6 @@ public class UbicacionService {
                     ubicacion.setEquipos(ubicacionActualizada.getEquipos());
                     return ubicacionRepository.save(ubicacion);
                 })
-                .orElseThrow(() -> new RuntimeException("Ubicación no encontrada"));
+                .orElseThrow(() -> new UbicacionNotFoundException("Ubicación no encontrada"));
     }
 }

@@ -2,6 +2,7 @@ package com.salesianos.satapp.controller;
 
 import com.salesianos.satapp.dto.CreateNotaDto;
 import com.salesianos.satapp.dto.GetNotaDto;
+import com.salesianos.satapp.model.Nota;
 import com.salesianos.satapp.service.NotaService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -34,9 +35,9 @@ public class NotaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(GetNotaDto.of(notaService.saveNota(incidenciaId, nota)));
     }
 
-    @PutMapping("/{notaId}")
-    public GetNotaDto editNota(@PathVariable Long notaId, @RequestBody CreateNotaDto nota) {
-        return GetNotaDto.of(notaService.editNota(notaId, nota));
+    @PutMapping("/{notaId}/{incidenciaId}")
+    public ResponseEntity<Nota> editNota(@PathVariable Long notaId, @RequestBody CreateNotaDto nota, @PathVariable Long incidenciaId) {
+        return ResponseEntity.status(201).body(notaService.update(notaId, nota, incidenciaId));
     }
 
     @DeleteMapping("/{notaId}/{incidenciaId}")

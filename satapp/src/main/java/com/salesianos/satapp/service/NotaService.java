@@ -1,6 +1,8 @@
 package com.salesianos.satapp.service;
 
+import com.salesianos.satapp.dto.CreateCategoriaDto;
 import com.salesianos.satapp.dto.CreateNotaDto;
+import com.salesianos.satapp.model.Categoria;
 import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.model.Nota;
 import com.salesianos.satapp.repository.IncidenciaRepository;
@@ -52,26 +54,24 @@ public class NotaService {
         return nota;
     }
 
-    public Nota editNota(Long notaId, CreateNotaDto notaNueva) {
+    public Nota update(Long notaId, CreateNotaDto notaNueva, Long incidenciaId) {
+            Incidencia incidencia = incidenciaRepository.findById(incidenciaId)
+                    .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado la incidencia"));
 
-        Nota nota = incidenciaRepository.findByIdNota(notaId)
-                .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado la nota"));
+            Nota nota = findNotaById(notaId);
 
-        nota.setAutor(notaNueva.autor());
-        nota.setContenido(notaNueva.contenido());
-        nota.setIncidencia(nota.getIncidencia());
+            nota.setContenido(notaNueva.contenido());
+            nota.setAutor(notaNueva.autor());
 
-        incidenciaRepository.save(nota.getIncidencia());
+            incidenciaRepository.save(incidencia);
 
-        return nota;
+            return nota;
     }
 
     public void deleteById(Long id) {
-
-        Incidencia incidencia = incidenciaRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado la incidencia con id: " + id));
-
-        incidencia.removeNota(findNotaById(id));
+        Nota nota = findNotaById(id);
+        Incidencia incidencia = nota.getIncidencia();
+        incidencia.removeNota(nota);
         incidenciaRepository.save(incidencia);
     }
 

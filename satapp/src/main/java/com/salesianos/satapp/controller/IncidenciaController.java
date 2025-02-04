@@ -30,7 +30,7 @@ public class IncidenciaController {
 
     private final IncidenciaService incidenciaService;
 
-    @Operation(summary = "Obtiene todas las bicicletas")
+    @Operation(summary = "Obtiene todas las incidencias")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Se han encontrado incidencias",

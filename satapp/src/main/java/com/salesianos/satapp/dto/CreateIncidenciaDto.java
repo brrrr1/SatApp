@@ -12,7 +12,7 @@ public record CreateIncidenciaDto(
         Estado estado,
         String urgencia,
         Usuario usuario,
-        /*Categoria categoria,*/
+        Categoria categoria,
         Ubicacion ubicacion,
         Equipo equipo,
         List<Nota> notas
@@ -26,7 +26,7 @@ public record CreateIncidenciaDto(
                 i.getEstado(),
                 i.getUrgencia(),
                 i.getUsuario(),
-                /*i.getCategoria(),*/
+                i.getCategoria(),
                 i.getUbicacion(),
                 i.getEquipo(),
                 i.getNotas()

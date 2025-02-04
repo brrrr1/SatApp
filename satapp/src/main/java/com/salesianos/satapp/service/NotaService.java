@@ -58,8 +58,8 @@ public class NotaService {
                 .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado la nota"));
 
         nota.setAutor(notaNueva.autor());
-        nota.setFecha(notaNueva.fecha().atStartOfDay());
         nota.setContenido(notaNueva.contenido());
+        nota.setIncidencia(nota.getIncidencia());
 
         incidenciaRepository.save(nota.getIncidencia());
 

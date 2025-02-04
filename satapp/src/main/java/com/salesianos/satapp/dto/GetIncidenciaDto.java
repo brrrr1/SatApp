@@ -1,9 +1,6 @@
 package com.salesianos.satapp.dto;
 
-import com.salesianos.satapp.model.Estado;
-import com.salesianos.satapp.model.Incidencia;
-import com.salesianos.satapp.model.Nota;
-import com.salesianos.satapp.model.Usuario;
+import com.salesianos.satapp.model.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -17,6 +14,7 @@ public record GetIncidenciaDto(
         Estado estado,
         String urgencia,
         Usuario usuario,
+        GetCategoriaDto categoria,
         GetEquipoSinUbiDto equipo,
         GetUbicacionSinEquipoDto ubicacion,
         List<GetNotaDto> notas
@@ -30,6 +28,7 @@ public record GetIncidenciaDto(
                 incidencia.getEstado(),
                 incidencia.getUrgencia(),
                 incidencia.getUsuario(),
+                GetCategoriaDto.of(incidencia.getCategoria()),
                 GetEquipoSinUbiDto.of(incidencia.getEquipo()),
                 GetUbicacionSinEquipoDto.of(incidencia.getUbicacion()),
                 incidencia.getNotas().stream().map(GetNotaDto::of).toList()

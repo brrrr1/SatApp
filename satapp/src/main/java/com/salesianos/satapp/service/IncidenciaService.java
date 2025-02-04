@@ -25,7 +25,7 @@ public class IncidenciaService {
                 .estado(incidenciaDto.estado().ABIERTA)
                 .usuario(incidenciaDto.usuario())
                 .equipo(incidenciaDto.equipo())
-                /*.categoria(incidenciaDto.categoria())*/
+                .categoria(incidenciaDto.categoria())
                 .ubicacion(incidenciaDto.ubicacion())
                 .notas(incidenciaDto.notas())
                 .build());

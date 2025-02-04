@@ -56,15 +56,7 @@ public class UbicacionController {
                     content = @Content(schema = @Schema(implementation = GetUbicacionDto.class)))})
     @PostMapping
     public ResponseEntity<GetUbicacionDto> create(@RequestBody CreateUbicacionDto createUbicacionDto) {
-
-        Ubicacion ubicacion = new Ubicacion();
-        ubicacion.setNombre(createUbicacionDto.nombre());
-
-
-        Ubicacion savedUbicacion = ubicacionService.save(ubicacion);
-
-
-        return ResponseEntity.status(201).body(GetUbicacionDto.of(savedUbicacion));
+        return ResponseEntity.status(201).body(GetUbicacionDto.of(ubicacionService.save(createUbicacionDto)));
     }
 
     @Operation(summary = "Actualizar una ubicación", description = "Actualiza los datos de una ubicación existente.")

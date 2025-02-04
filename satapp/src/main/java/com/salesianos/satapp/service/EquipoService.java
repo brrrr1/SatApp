@@ -1,5 +1,8 @@
 package com.salesianos.satapp.service;
 
+import com.salesianos.satapp.dto.CreateCategoriaDto;
+import com.salesianos.satapp.dto.EditEquipoDto;
+import com.salesianos.satapp.model.Categoria;
 import com.salesianos.satapp.model.Equipo;
 import com.salesianos.satapp.repository.EquipoRepository;
 import lombok.RequiredArgsConstructor;
@@ -22,8 +25,12 @@ public class EquipoService {
         return equipoRepository.findById(id);
     }
 
-    public Equipo save(Equipo equipo) {
-        return equipoRepository.save(equipo);
+    public Equipo save(EditEquipoDto editEquipoDto) {
+        return equipoRepository.save(Equipo.builder()
+                .nombre(editEquipoDto.nombre())
+                .caracteristicas(editEquipoDto.caracteristicas())
+                .ubicacion(editEquipoDto.ubicacion())
+                .build());
     }
 
     public void deleteById(Long id) {
@@ -34,12 +41,12 @@ public class EquipoService {
         }
     }
 
-    public Equipo update(Long id, Equipo equipoActualizado) {
+    public Equipo update(Long id, EditEquipoDto equipoActualizado) {
         return equipoRepository.findById(id)
                 .map(equipo -> {
-                    equipo.setNombre(equipoActualizado.getNombre());
-                    equipo.setCaracteristicas(equipoActualizado.getCaracteristicas());
-                    equipo.setUbicacion(equipoActualizado.getUbicacion());
+                    equipo.setNombre(equipoActualizado.nombre());
+                    equipo.setCaracteristicas(equipoActualizado.caracteristicas());
+                    equipo.setUbicacion(equipoActualizado.ubicacion());
                     return equipoRepository.save(equipo);
                 })
                 .orElseThrow(() -> new RuntimeException("Equipo no encontrado"));

@@ -47,4 +47,15 @@ public class CategoriaService {
         categoriaRepository.deleteById(id);
     }
 
+    public Categoria update(Long id, CreateCategoriaDto c) {
+        return categoriaRepository.findById(id)
+                .map(categoria -> {
+                    categoria.setNombre(c.nombre());
+                    categoria.setCategoriaPadre(c.categoriaPadre());
+                    categoria.setListaCategoriasHijas(c.listaCategoriasHijas());
+                    return categoriaRepository.save(categoria);
+                })
+                .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado ninguna categoria con ese id"));
+    }
+
 }

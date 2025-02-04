@@ -56,13 +56,7 @@ public class EquipoController {
                     content = @Content(schema = @Schema(implementation = GetEquipoDto.class)))})
     @PostMapping
     public ResponseEntity<GetEquipoDto> create(@RequestBody EditEquipoDto editEquipoDto) {
-        Equipo equipo = new Equipo();
-        equipo.setNombre(editEquipoDto.nombre());
-        equipo.setCaracteristicas(editEquipoDto.caracteristicas());
-        equipo.setUbicacion(editEquipoDto.ubicacion());
-
-        Equipo savedEquipo = equipoService.save(equipo);
-        return ResponseEntity.status(201).body(GetEquipoDto.of(savedEquipo));
+        return ResponseEntity.status(201).body(GetEquipoDto.of(equipoService.save(editEquipoDto)));
     }
 
     @Operation(summary = "Actualizar un equipo", description = "Actualiza los datos de un equipo existente.")
@@ -72,11 +66,7 @@ public class EquipoController {
             @ApiResponse(responseCode = "404", description = "Equipo no encontrado")})
     @PutMapping("/{id}")
     public ResponseEntity<GetEquipoDto> update(@PathVariable Long id, @RequestBody EditEquipoDto editEquipoDto) {
-        Equipo equipoActualizado = new Equipo();
-        equipoActualizado.setNombre(editEquipoDto.nombre());
-        equipoActualizado.setCaracteristicas(editEquipoDto.caracteristicas());
-
-        return ResponseEntity.ok(GetEquipoDto.of(equipoService.update(id, equipoActualizado)));
+        return ResponseEntity.status(201).body(GetEquipoDto.of(equipoService.update(id, editEquipoDto)));
     }
 
     @Operation(summary = "Eliminar un equipo", description = "Elimina un equipo por su ID.")

@@ -36,6 +36,11 @@ public class CategoriaController {
         return ResponseEntity.status(201).body(categoriaService.save(categoria));
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Categoria> update(@PathVariable Long id, @RequestBody CreateCategoriaDto categoria) {
+        return ResponseEntity.status(201).body(categoriaService.update(id, categoria));
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<?> delete(@PathVariable Long id) {
         categoriaService.deleteById(id);

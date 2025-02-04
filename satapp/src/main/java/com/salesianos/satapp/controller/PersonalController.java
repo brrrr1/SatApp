@@ -57,7 +57,7 @@ public class PersonalController {
                     description = "No se han encontrado miembros del personal"
             )
     })
-    @GetMapping()
+    @GetMapping
     public List<GetPersonalDto> getAll(){
         return personalService.findAll().stream().map(GetPersonalDto::of).toList();
 

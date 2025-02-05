@@ -75,7 +75,6 @@ Este proyecto es un sistema de gestión de incidencias diseñado para facilitar 
 ### Categoría
 - **GET** `/categoria/{id}` - Obtiene una categoría.
 - **PUT** `/categoria/{id}` - Edita una categoría.
-- **DELETE** `/categoria/{id}` - Borra una categoría.
 - **GET** `/categoria/` - Obtiene todas las categorías.
 - **POST** `/categoria/` - Crea una categoría.
 

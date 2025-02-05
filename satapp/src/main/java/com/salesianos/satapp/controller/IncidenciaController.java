@@ -108,44 +108,36 @@ public class IncidenciaController {
                             examples = {@ExampleObject(
                                     value = """
                                             {
-                                                "id": 402,
-                                                "fecha": "2025-02-05T13:25:21.6788755",
-                                                "titulo": "Título de la incidencia",
-                                                "descripcion": "Descripción detallada de la incidencia",
-                                                "estado": "ABIERTA",
-                                                "urgencia": null,
-                                                "usuario": {
-                                                    "id": 1,
-                                                    "nombre": null,
-                                                    "username": null,
-                                                    "password": null,
-                                                    "email": null,
-                                                    "role": null,
-                                                    "incidencias": []
-                                                },
-                                                "tecnicos": [],
-                                                "categoria": {
-                                                    "id": 1,
-                                                    "nombre": null,
-                                                    "incidencias": [],
-                                                    "categoriaPadre": null,
-                                                    "listaCategoriasHijas": []
-                                                },
-                                                "equipo": {
-                                                    "id": 1,
-                                                    "nombre": null,
-                                                    "caracteristicas": null,
-                                                    "ubicacion": null,
-                                                    "incidencias": []
-                                                },
-                                                "ubicacion": {
-                                                    "id": 1,
-                                                    "nombre": null,
-                                                    "incidencias": [],
-                                                    "equipos": []
-                                                },
-                                                "notas": null
-                                            }
+                                                 "fecha": "2025-02-04T10:33:33",
+                                                 "titulo": "Rotura del ordenador de Bruno Delgado",
+                                                 "descripcion": "Es muy torpe y ha roto su ordenador",
+                                                 "estado": "ABIERTA",
+                                                 "urgencia": "Urgente",
+                                                 "usuario": {
+                                                     "id": 1,
+                                                     "nombre": null,
+                                                     "username": null,
+                                                     "password": null,
+                                                     "email": null,
+                                                     "role": null
+                                                 },
+                                                 "categoria": {
+                                                     "id": 251,
+                                                     "nombre": "Impresoras",
+                                                     "nombreCategoriaPadre": "InformÃ¡tica",
+                                                     "listaCategoriasHijas": []
+                                                 },
+                                                 "equipo": {
+                                                     "id": 1,
+                                                     "nombre": "Pc Profesor",
+                                                     "caracteristicas": "Rotura de pantalla"
+                                                 },
+                                                 "ubicacion": {
+                                                     "id": 1,
+                                                     "nombre": "Aula 1ºDAM"
+                                                 },
+                                                 "notas": []
+                                             }
                                             """
 
                             )}
@@ -162,24 +154,33 @@ public class IncidenciaController {
                             schema = @Schema(implementation = CreateIncidenciaDto.class),
                             examples = @ExampleObject(value = """
     {
-                                          "fecha": "2024-02-03T12:00:00",
-                                          "titulo": "Título de la incidencia",
-                                          "descripcion": "Descripción detallada de la incidencia",
-                                          "estado": "ABIERTA",
-                                          "urgencia": "ALTA",
-                                          "usuario":{
-                                            "id": 1
-                                          },
-                                          "categoria":{
-                                            "id": 1
-                                          },
-                                          "equipo":{
-                                            "id": 1
-                                          },
-                                          "ubicacion": {
-                                            "id": 1
-                                          }
-                                        }
+                                                                                     "fecha": "2025-02-04T10:33:33",
+                                                                                     "titulo": "Rotura del ordenador de Bruno Delgado",
+                                                                                     "descripcion": "Es muy torpe y ha roto su ordenador",
+                                                                                     "estado": "ABIERTA",
+                                                                                     "urgencia": "Urgente",
+                                                                                     "usuario": {
+                                                                                         "id": 1
+                                                                                     },
+                                                                                     "categoria": {
+                                                                                         "id": 251,
+                                                                                         "nombre": "Impresoras",
+                                                                                         "nombreCategoriaPadre": "Informática",
+                                                                                         "listaCategoriasHijas": []
+                                                                                     },
+                                                                                     "equipo": {
+                                                                                         "id": 1,
+                                                                                         "nombre": "Pc Profesor",
+                                                                                         "caracteristicas": "Rotura de pantalla"
+                                                                                     },
+                                                                                     "ubicacion": {
+                                                                                         "id": 1,
+                                                                                         "nombre": "Aula 1ºDAM"
+                                                                                     },
+                                                                                     "nota":{
+                                                                                         "id": 1
+                                                                                     }
+                                                                                 }
                                     
 """)))
             @RequestBody CreateIncidenciaDto incidencia) {

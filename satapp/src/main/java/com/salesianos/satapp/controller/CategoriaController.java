@@ -340,7 +340,7 @@ public class CategoriaController {
         return ResponseEntity.ok(categoriaService.update(id, categoriaDto));
     }
 
-
+/*
     @Operation(summary = "Borra una categoría")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204",
@@ -357,5 +357,7 @@ public class CategoriaController {
         categoriaService.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+ */
 
 }

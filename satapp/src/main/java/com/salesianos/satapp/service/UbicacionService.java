@@ -2,7 +2,11 @@ package com.salesianos.satapp.service;
 
 import com.salesianos.satapp.dto.GetUbicacionDto;
 import com.salesianos.satapp.error.UbicacionNotFoundException;
+import com.salesianos.satapp.model.Equipo;
+import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.model.Ubicacion;
+import com.salesianos.satapp.repository.EquipoRepository;
+import com.salesianos.satapp.repository.IncidenciaRepository;
 import com.salesianos.satapp.repository.UbicacionRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +21,8 @@ import java.util.Optional;
 public class UbicacionService {
 
     private final UbicacionRepository ubicacionRepository;
+    private final IncidenciaRepository incidenciaRepository;
+    private final EquipoRepository equipoRepository;
 
     public List<Ubicacion> findAll() {
         List<Ubicacion> ubicaciones = ubicacionRepository.findAll();
@@ -36,18 +42,36 @@ public class UbicacionService {
     }
 
     public Ubicacion saveUbicacion(GetUbicacionDto nuevo) {
-
-
+        
         Ubicacion ubi = Ubicacion.builder()
                 .nombre(nuevo.nombre())
                 .build();
-
 
         return ubicacionRepository.save(ubi);
     }
 
     public void deleteUbicacion(Long idUbi) {
 
+        Optional<Ubicacion> ubi = ubicacionRepository.findById(idUbi);
+
+        if (ubi.isEmpty()) {
+            throw new UbicacionNotFoundException("No se ha encontrado esta ubicación");
+        }
+
+        List<Incidencia> incidencias = incidenciaRepository.findByUbicacionId(idUbi);
+        List<Equipo> equipos = equipoRepository.findByUbicacionId(idUbi);
+
+        for (Incidencia incidencia : incidencias) {
+            incidencia.setUbicacion(null);
+            incidenciaRepository.save(incidencia);
+
+        }
+
+        for (Equipo equipo : equipos) {
+            equipo.setUbicacion(null);
+            equipoRepository.save(equipo);
+
+        }
         ubicacionRepository.deleteById(idUbi);
 
     }

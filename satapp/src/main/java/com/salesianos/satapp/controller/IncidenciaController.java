@@ -14,10 +14,12 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -28,7 +30,7 @@ public class IncidenciaController {
 
     private final IncidenciaService incidenciaService;
 
-    @Operation(summary = "Obtiene todas las bicicletas")
+    @Operation(summary = "Obtiene todas las incidencias")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Se han encontrado incidencias",
@@ -42,7 +44,7 @@ public class IncidenciaController {
                                                       "fecha": "29/01",
                                                       "titulo": "Aire acondicionado 2DAM",
                                                       "descripcion": "El aire acondicionado en la clase de 2DAM no va desde Octubre. Además, no hay mando.",
-                                                      "estado": "Abierta",
+                                                      "estado": "ABIERTA",
                                                       "urgencia": "Muy urgente"
                                                       
                                                   },
@@ -51,7 +53,7 @@ public class IncidenciaController {
                                                       "fecha": "30/01",
                                                       "titulo": "Proyector 1AyF",
                                                       "descripcion": "El proyector en la clase de 1AyF ha dejado de funcionar.",
-                                                      "estado": "Abierta",
+                                                      "estado": "ABIERTA",
                                                       "urgencia": "Para YA"
                                                       
                                                   }
@@ -81,7 +83,7 @@ public class IncidenciaController {
                                                       "fecha": "29/01",
                                                       "titulo": "Aire acondicionado 2DAM",
                                                       "descripcion": "El aire acondicionado en la clase de 2DAM no va desde Octubre. Además, no hay mando.",
-                                                      "estado": "Abierta",
+                                                      "estado": "ABIERTA",
                                                       "urgencia": "Muy urgente"
                                                       
                                             }
@@ -93,7 +95,7 @@ public class IncidenciaController {
                     content = @Content),
     })
     @GetMapping("/{id}")
-    public GetIncidenciaDto getIncidencia(@PathVariable Long id) {
+    public GetIncidenciaDto getById(@PathVariable Long id) {
         return GetIncidenciaDto.of(incidenciaService.findById(id));
     }
 
@@ -159,10 +161,7 @@ public class IncidenciaController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha eliminado la incidencia",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = Incidencia.class)),
-                            examples = {@ExampleObject(
-
-                            )}
+                            array = @ArraySchema(schema = @Schema(implementation = Incidencia.class))
                     )}),
             @ApiResponse(responseCode = "404",
                     description = "No se ha podido borrar la incidencia",
@@ -172,6 +171,128 @@ public class IncidenciaController {
     public ResponseEntity<?> deleteIncidencia(@PathVariable Long id) {
         incidenciaService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+
+    @Operation(summary = "Obtiene las incidencias de un alumno por su id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado las incidencias de ese usuario",
+                    content = { @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            [
+                                                  {
+                                                      "id": 1,
+                                                      "fecha": "29/01",
+                                                      "titulo": "Aire acondicionado 2DAM",
+                                                      "descripcion": "El aire acondicionado en la clase de 2DAM no va desde Octubre. Además, no hay mando.",
+                                                      "estado": "Abierta",
+                                                      "urgencia": "Muy urgente"
+                                                      
+                                                  },
+                                                  {
+                                                      "id": 2,
+                                                      "fecha": "30/01",
+                                                      "titulo": "Proyector 1AyF",
+                                                      "descripcion": "El proyector en la clase de 1AyF ha dejado de funcionar.",
+                                                      "estado": "Abierta",
+                                                      "urgencia": "Para YA"
+                                                      
+                                                  }
+                                            ]
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se han encontrado incidencias para ese usuario",
+                    content = @Content),
+    })
+    @GetMapping("/{alumnoId}/incidencias")
+    public List<Incidencia> getIncidencias(@PathVariable Long alumnoId) {
+        return incidenciaService.getIncidenciasByAlumno(alumnoId);
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado las incidencias en ese rango de fechas",
+                    content = { @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            [
+                                                  {
+                                                      "id": 1,
+                                                      "fecha": "29/01",
+                                                      "titulo": "Aire acondicionado 2DAM",
+                                                      "descripcion": "El aire acondicionado en la clase de 2DAM no va desde Octubre. Además, no hay mando.",
+                                                      "estado": "Abierta",
+                                                      "urgencia": "Muy urgente"
+                                                      
+                                                  },
+                                                  {
+                                                      "id": 2,
+                                                      "fecha": "30/01",
+                                                      "titulo": "Proyector 1AyF",
+                                                      "descripcion": "El proyector en la clase de 1AyF ha dejado de funcionar.",
+                                                      "estado": "Abierta",
+                                                      "urgencia": "Para YA"
+                                                      
+                                                  }
+                                            ]
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se han encontrado incidencias en ese rango de fechas",
+                    content = @Content),
+    })
+    @GetMapping("/filtrar")
+    public ResponseEntity<List<Incidencia>> getIncidenciasByFecha(
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
+        return ResponseEntity.ok(incidenciaService.getIncidenciasByFecha(startDate, endDate));
+    }
+
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200",
+                    description = "Se han encontrado las incidencias de ese técnico y por su estado",
+                    content = { @Content(mediaType = "application/json",
+                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            examples = {@ExampleObject(
+                                    value = """
+                                            [
+                                                  {
+                                                      "id": 1,
+                                                      "fecha": "29/01",
+                                                      "titulo": "Aire acondicionado 2DAM",
+                                                      "descripcion": "El aire acondicionado en la clase de 2DAM no va desde Octubre. Además, no hay mando.",
+                                                      "estado": "Abierta",
+                                                      "urgencia": "Muy urgente"
+                                                      
+                                                  },
+                                                  {
+                                                      "id": 2,
+                                                      "fecha": "30/01",
+                                                      "titulo": "Proyector 1AyF",
+                                                      "descripcion": "El proyector en la clase de 1AyF ha dejado de funcionar.",
+                                                      "estado": "Abierta",
+                                                      "urgencia": "Para YA"
+                                                      
+                                                  }
+                                            ]
+                                            """
+                            )}
+                    )}),
+            @ApiResponse(responseCode = "404",
+                    description = "No se han encontrado incidencias de ese técnico por su estado",
+                    content = @Content),
+    })
+    @GetMapping("/usuario/{usuarioId}/estado")
+    public ResponseEntity<List<Incidencia>> getIncidenciasByUsuarioAndEstado(@PathVariable Long usuarioId, @RequestParam String estado) {
+        return ResponseEntity.ok(incidenciaService.getIncidenciasByUsuarioAndEstado(usuarioId, estado));
     }
 
 

@@ -1,19 +1,41 @@
 package com.salesianos.satapp.model;
 
-import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
-import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
-@Entity
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 @Setter
 @ToString
+@Entity
 @NoArgsConstructor
 @SuperBuilder
-@DiscriminatorValue("a")
-public class Alumno extends Usuario{
-    
+public class Alumno extends Usuario {
 
+    @ToString.Exclude
+    @EqualsAndHashCode.Exclude
+    @Builder.Default
+    @OneToMany(
+            mappedBy = "alumno",
+            fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<HistoricoCursos> historicoCursos= new ArrayList<>();
+
+    public void addHistoricoCursos(HistoricoCursos historicoCursos) {
+        historicoCursos.setAlumno(this);
+        this.historicoCursos.add(historicoCursos);
+    }
+
+    public void removeHistoricoCursos(HistoricoCursos historicoCursos) {
+        this.historicoCursos.remove(historicoCursos);
+        historicoCursos.setAlumno(null);
+    }
 }

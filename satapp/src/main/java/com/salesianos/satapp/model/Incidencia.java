@@ -56,7 +56,7 @@ public class Incidencia {
     @OneToMany(mappedBy = "incidencia",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
-            fetch = FetchType.EAGER)
+            fetch = FetchType.LAZY)
     private List<Nota> notas = new ArrayList<>();
 
     // Métodos helpers notas

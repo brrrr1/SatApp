@@ -209,7 +209,24 @@ public class AlumnoController {
                     content = @Content),
     })
     @PostMapping
-    public GetAlumnoDto saveAlumno(@RequestBody EditAlumnoDto alumnoNuevo) {
+    public GetAlumnoDto saveAlumno(
+
+
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Cuerpo del alumno a crear", required = true,
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = EditAlumnoDto.class),
+                            examples = @ExampleObject(value = """
+    {
+        "nombre": "Messi",
+        "username": "cr7",
+        "email": "cr7@triana.salesianos.com",
+        "password": "password123",
+        "role": "ALUMNO",
+        "historicoCursos": []
+    }
+""")))
+            @RequestBody EditAlumnoDto alumnoNuevo) {
         Alumno alumno = alumnoService.saveAlumno(alumnoNuevo);
         return GetAlumnoDto.of(alumno);
     }
@@ -231,7 +248,7 @@ public class AlumnoController {
     @PutMapping("/{id}")
     public GetAlumnoDto update(@PathVariable Long id,
                                @io.swagger.v3.oas.annotations.parameters.RequestBody(
-                                       description = "Cuerpo del alumno", required = true,
+                                       description = "Cuerpo del alumno a editar", required = true,
                                        content = @Content(mediaType = "application/json",
                                                schema = @Schema(implementation = EditAlumnoDto.class),
                                                examples = @ExampleObject(value = """
@@ -263,7 +280,18 @@ public class AlumnoController {
                     content = @Content),
     })
     @PostMapping("/{alumnoId}/historico")
-    public GetHistoricoCursosDto saveHistoricoCurso(@PathVariable Long alumnoId, @RequestBody EditHistoricoCursosDto historicoDto){
+    public GetHistoricoCursosDto saveHistoricoCurso(@PathVariable Long alumnoId,
+                                                    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                                                            description = "Cuerpo del histórico", required = true,
+                                                            content = @Content(mediaType = "application/json",
+                                                                    schema = @Schema(implementation = EditHistoricoCursosDto.class),
+                                                                    examples = @ExampleObject(value = """
+{
+    "curso": "22/23",
+    "cursoEscolar": "2ºESO"
+}
+""")))
+                                                    @RequestBody EditHistoricoCursosDto historicoDto){
         HistoricoCursos historicoCursos = alumnoService.saveHistoricoCurso(alumnoId, historicoDto);
 
         return GetHistoricoCursosDto.of(historicoCursos);

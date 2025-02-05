@@ -33,6 +33,7 @@ public class PersonalService {
 
     public Personal savePersonal(EditPersonalDto editPersonalCmd) {
         return personalRepository.save(Personal.builder()
+                .nombre(editPersonalCmd.nombre())
                 .email(editPersonalCmd.email())
                 .role(editPersonalCmd.role())
                 .password(editPersonalCmd.password())

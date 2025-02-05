@@ -17,6 +17,7 @@ public class UbicacionService {
 
     private final UbicacionRepository ubicacionRepository;
 
+
     public List<Ubicacion> findAll() {
         return ubicacionRepository.findAll();
     }

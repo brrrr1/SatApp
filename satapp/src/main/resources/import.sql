@@ -87,8 +87,8 @@ INSERT INTO categoria (id, nombre, categoria_relacion_id) VALUES
 
 
 INSERT INTO incidencia(id, fecha_creacion, titulo, descripcion, estado, urgencia, ubicacion_id, equipo_id, categoria_id, usuario_id) VALUES
-(nextval('incidencia_seq'), '2024-02-03T12:00:00', 'Rotura pantalla profesor', 'Se ha roto la patalla del profesor, pinta feo', 'ABIERTA', 'Urgente', 1, 1, 251, 1),
-(nextval('incidencia_seq'), '2024-02-03T12:00:00', 'Aire acondionado estropeado', 'No funciona el botón del aire', 'ABIERTA', 'Urgente', 51, 51, 251, 101),
+(nextval('incidencia_seq'), '2021-02-03T12:00:00', 'Rotura pantalla profesor', 'Se ha roto la patalla del profesor, pinta feo', 'ABIERTA', 'Urgente', 1, 1, 251, 1),
+(nextval('incidencia_seq'), '2023-02-03T12:00:00', 'Aire acondionado estropeado', 'No funciona el botón del aire', 'ABIERTA', 'Urgente', 51, 51, 251, 101),
 (nextval('incidencia_seq'), '2024-02-03T12:00:00', 'No enciende la pantalla', 'No enciende la pantalla del Pc 1', 'ABIERTA', 'Urgente', 101, 101, 251, 101),
 (nextval('incidencia_seq'), '2024-02-03T12:00:00', 'No enciende la pantalla', 'No enciende la pantalla del Pc 2', 'ABIERTA', 'Urgente', 101, 151, 251, 201),
 (nextval('incidencia_seq'), '2024-02-03T12:00:00', 'No enciende la pantalla', 'No enciende la pantalla del Pc 3', 'ABIERTA', 'Urgente', 101, 201, 251, 301),

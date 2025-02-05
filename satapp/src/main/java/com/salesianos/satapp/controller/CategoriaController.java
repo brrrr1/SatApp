@@ -1,6 +1,7 @@
 package com.salesianos.satapp.controller;
 
 import com.salesianos.satapp.dto.CreateCategoriaDto;
+import com.salesianos.satapp.dto.EditAlumnoDto;
 import com.salesianos.satapp.dto.GetCategoriaDto;
 import com.salesianos.satapp.dto.GetIncidenciaDto;
 import com.salesianos.satapp.model.Categoria;
@@ -284,7 +285,23 @@ public class CategoriaController {
                     content = @Content),
     })
     @PostMapping
-    public ResponseEntity<Categoria> create(@RequestBody CreateCategoriaDto categoria) {
+    public ResponseEntity<Categoria> create(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Cuerpo de la categoría", required = true,
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CreateCategoriaDto.class),
+                            examples = @ExampleObject(value = """
+{
+    "nombre": "Informática",
+    "incidencias": [],
+    "categoriaPadre": {
+        "id": 1,
+        "nombre": "Electrónica"
+    },
+    "listaCategoriasHijas": []
+}
+""")))
+            @RequestBody CreateCategoriaDto categoria) {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaService.save(categoria));
     }
 
@@ -310,7 +327,20 @@ public class CategoriaController {
                     content = @Content),
     })
     @PutMapping("/{id}")
-    public ResponseEntity<Categoria> update(@PathVariable Long id, @RequestBody CreateCategoriaDto categoria) {
+    public ResponseEntity<Categoria> update(@PathVariable Long id,
+                                            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                                                    description = "Cuerpo de la categoría a editar", required = true,
+                                                    content = @Content(mediaType = "application/json",
+                                                            schema = @Schema(implementation = CreateCategoriaDto.class),
+                                                            examples = @ExampleObject(value = """
+    {
+        "id": 1,
+        "nombre": "Enchufes",
+        "nombreCategoriaPadre": [],
+        "listaCategoriasHijas": []
+    }
+""")))
+                                            @RequestBody CreateCategoriaDto categoria) {
         return ResponseEntity.status(HttpStatus.OK).body(categoriaService.update(id, categoria));
     }
 

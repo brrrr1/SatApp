@@ -39,23 +39,94 @@ public class EquipoController {
                             array = @ArraySchema(schema = @Schema(implementation = GetEquipoDto.class)),
                             examples = {@ExampleObject(
                                     value = """
-                                            {
-                                                "id": 1,
-                                                "nombre": "Aire acondicionado",
-                                                "caracteristicas": "Aire acondicionado de la sala de profesores",
-                                                "ubicacion": {
-                                                    "id": 1,
-                                                    "nombre": "Sala de profesores",
-                                                },
-                                                "incidencias": [
-                                                   
-                                                ]
-                                            }
+                                            [
+                                                 {
+                                                     "id": 1,
+                                                     "nombre": "Pc Profesor",
+                                                     "caracteristicas": "Rotura de pantalla",
+                                                     "ubicacion": {
+                                                         "id": 1,
+                                                         "nombre": "Aula 1ºDAM"
+                                                     }
+                                                 },
+                                                 {
+                                                     "id": 51,
+                                                     "nombre": "Aire Acondicionado",
+                                                     "caracteristicas": "No funciona el botón de encendido",
+                                                     "ubicacion": {
+                                                         "id": 51,
+                                                         "nombre": "Aula 2ºDAM"
+                                                     }
+                                                 },
+                                                 {
+                                                     "id": 101,
+                                                     "nombre": "Pc 1",
+                                                     "caracteristicas": "No enciende la pantalla",
+                                                     "ubicacion": {
+                                                         "id": 151,
+                                                         "nombre": "Aula 2ºAyF"
+                                                     }
+                                                 },
+                                                 {
+                                                     "id": 151,
+                                                     "nombre": "Pc 2",
+                                                     "caracteristicas": "No enciende la pantalla",
+                                                     "ubicacion": {
+                                                         "id": 151,
+                                                         "nombre": "Aula 2ºAyF"
+                                                     }
+                                                 },
+                                                 {
+                                                     "id": 201,
+                                                     "nombre": "Pc 3",
+                                                     "caracteristicas": "No enciende la pantalla",
+                                                     "ubicacion": {
+                                                         "id": 151,
+                                                         "nombre": "Aula 2ºAyF"
+                                                     }
+                                                 },
+                                                 {
+                                                     "id": 251,
+                                                     "nombre": "Pc 4",
+                                                     "caracteristicas": "No enciende la pantalla",
+                                                     "ubicacion": {
+                                                         "id": 151,
+                                                         "nombre": "Aula 2ºAyF"
+                                                     }
+                                                 },
+                                                 {
+                                                     "id": 301,
+                                                     "nombre": "Mesa 1",
+                                                     "caracteristicas": "Pata rota",
+                                                     "ubicacion": {
+                                                         "id": 101,
+                                                         "nombre": "Aula 1ºAyF"
+                                                     }
+                                                 },
+                                                 {
+                                                     "id": 351,
+                                                     "nombre": "Mesa 2",
+                                                     "caracteristicas": "Pata rota",
+                                                     "ubicacion": {
+                                                         "id": 101,
+                                                         "nombre": "Aula 1ºAyF"
+                                                     }
+                                                 },
+                                                 {
+                                                     "id": 401,
+                                                     "nombre": "Mesa 3",
+                                                     "caracteristicas": "Pata rota",
+                                                     "ubicacion": {
+                                                         "id": 101,
+                                                         "nombre": "Aula 1ºAyF"
+                                                     }
+                                                 }
+                                             ]
                                             """
                             )}
                     )}),
             @ApiResponse(responseCode = "404",
-                    description = "No se ha encontrado el equipo",
+                    description = "No se han encontrado los equipos",
                     content = @Content),
     })
     @GetMapping
@@ -74,16 +145,13 @@ public class EquipoController {
                             examples = {@ExampleObject(
                                     value = """
                                             {
-                                                "id": 1,
-                                                "nombre": "Aire acondicionado",
-                                                "caracteristicas": "Aire acondicionado de la sala de profesores",
-                                                "ubicacion": {
-                                                    "id": 1,
-                                                    "nombre": "Sala de profesores",
-                                                },
-                                                "incidencias": [
-                                                   
-                                                ]
+                                                     "id": 401,
+                                                     "nombre": "Mesa 3",
+                                                     "caracteristicas": "Pata rota",
+                                                     "ubicacion": {
+                                                         "id": 101,
+                                                         "nombre": "Aula 1ºAyF"
+                                                     }
                                             }
                                             """
                             )}
@@ -127,7 +195,22 @@ public class EquipoController {
                     content = @Content),
     })
     @PostMapping
-    public ResponseEntity<GetEquipoDto> create(@RequestBody EditEquipoDto editEquipoDto) {
+    public ResponseEntity<GetEquipoDto> create(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Cuerpo del equipo a crear", required = true,
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = EditEquipoDto.class),
+                            examples = @ExampleObject(value = """
+    {
+        "nombre": "Messi",
+        "username": "cr7",
+        "email": "cr7@triana.salesianos.com",
+        "password": "password123",
+        "role": "ALUMNO",
+        "historicoCursos": []
+    }
+""")))
+            @RequestBody EditEquipoDto editEquipoDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(GetEquipoDto.of(equipoService.save(editEquipoDto)));
     }
 
@@ -159,7 +242,26 @@ public class EquipoController {
                     content = @Content),
     })
     @PutMapping("/{id}")
-    public ResponseEntity<GetEquipoDto> update(@PathVariable Long id, @RequestBody EditEquipoDto editEquipoDto) {
+    public ResponseEntity<GetEquipoDto> update(@PathVariable Long id,
+                                               @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                                                       description = "Cuerpo del equipo a editar", required = true,
+                                                       content = @Content(mediaType = "application/json",
+                                                               schema = @Schema(implementation = EditEquipoDto.class),
+                                                               examples = @ExampleObject(value = """
+    {
+                                                                               "id": 1,
+                                                                               "nombre": "Aire Acondicionado",
+                                                                               "caracteristicas": "Aire Acondicionado del 2025",
+                                                                               "ubicacion": {
+                                                                                   "id": 1,
+                                                                                   "nombre": "Sala de profesores"
+                                                                               },
+                                                                               "incidencias": [
+                                                                           
+                                                                               ]
+                                                                           }
+""")))
+                                               @RequestBody EditEquipoDto editEquipoDto) {
         return ResponseEntity.status(HttpStatus.OK).body(GetEquipoDto.of(equipoService.update(id, editEquipoDto)));
     }
 

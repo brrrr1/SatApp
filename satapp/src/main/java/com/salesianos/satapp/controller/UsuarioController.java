@@ -30,7 +30,7 @@ public class UsuarioController {
 
     private final UsuarioService usuarioService;
 
-    @Operation(summary = "Obtiene todas los usuario")
+    @Operation(summary = "Obtiene todos los usuarios")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Se han encontrado las usuarios",
@@ -38,10 +38,112 @@ public class UsuarioController {
                             array = @ArraySchema(schema = @Schema(implementation = GetUsuarioDto.class)),
                             examples = {@ExampleObject(
                                     value = """
-                                            {
-                                                "id": 1,
-                                                "username": "Rafahm03"
-                                            }
+                                            [
+                                                {
+                                                    "id": 1,
+                                                    "nombre": "Moisés Dorado",
+                                                    "username": "moidor",
+                                                    "password": "passwordmoidor",
+                                                    "email": "moi.dor@gmail.com",
+                                                    "role": "USER"
+                                                },
+                                                {
+                                                    "id": 101,
+                                                    "nombre": "Carlos Roman",
+                                                    "username": "carrom",
+                                                    "password": "passwordcarrom",
+                                                    "email": "carlos.roman@gmail.com",
+                                                    "role": "USER"
+                                                },
+                                                {
+                                                    "id": 201,
+                                                    "nombre": "Manuel Maman",
+                                                    "username": "manmam",
+                                                    "password": "passwordmanmam",
+                                                    "email": "manuel.maman@gmail.com",
+                                                    "role": "USER"
+                                                },
+                                                {
+                                                    "id": 301,
+                                                    "nombre": "Carlos Ruiz",
+                                                    "username": "carrui",
+                                                    "password": "passwordcarrui",
+                                                    "email": "carlos.ruiz@gmail.com",
+                                                    "role": "USER"
+                                                },
+                                                {
+                                                    "id": 401,
+                                                    "nombre": "Pablo Camara",
+                                                    "username": "pabcam",
+                                                    "password": "passwordpabcam",
+                                                    "email": "pablo.camara@gmail.com",
+                                                    "role": "USER"
+                                                },
+                                                {
+                                                    "id": 501,
+                                                    "nombre": "Pedro Sanchez",
+                                                    "username": "pedsan",
+                                                    "password": "passwordpedsan",
+                                                    "email": "pedro.sanchez@gmail.com",
+                                                    "role": "USER"
+                                                },
+                                                {
+                                                    "id": 601,
+                                                    "nombre": "Alvaro Castilla",
+                                                    "username": "alvcas",
+                                                    "password": "passwordalvcas",
+                                                    "email": "alvaro.castilla@gmail.com",
+                                                    "role": "USER"
+                                                },
+                                                {
+                                                    "id": 251,
+                                                    "nombre": "Victor Levic",
+                                                    "username": "viclev",
+                                                    "password": "passwordviclev",
+                                                    "email": "victor.levic@gmail.com",
+                                                    "role": "ADMIN"
+                                                },
+                                                {
+                                                    "id": 151,
+                                                    "nombre": "Joaquin Carrascal",
+                                                    "username": "joacar",
+                                                    "password": "passwordjoacar",
+                                                    "email": "joaquin.carrascal@gmail.com",
+                                                    "role": "ADMIN"
+                                                },
+                                                {
+                                                    "id": 551,
+                                                    "nombre": "Pablo Tey",
+                                                    "username": "pabtey",
+                                                    "password": "passwordpabtey",
+                                                    "email": "pablo.tey@gmail.com",
+                                                    "role": "ADMIN"
+                                                },
+                                                {
+                                                    "id": 351,
+                                                    "nombre": "Rafa Hernandez",
+                                                    "username": "rafher",
+                                                    "password": "passwordrafher",
+                                                    "email": "rafa.hernandez@gmail.com",
+                                                    "role": "ADMIN"
+                                                },
+                                                {
+                                                    "id": 51,
+                                                    "nombre": "Bruno Delgado",
+                                                    "username": "brudel",
+                                                    "password": "passwordbrudel",
+                                                    "email": "bruno.delgado@gmail.com",
+                                                    "role": "ADMIN"
+                                                },
+                                                {
+                                                    "id": 451,
+                                                    "nombre": "Pepe Segura",
+                                                    "username": "pepseg",
+                                                    "password": "passwordpepseg",
+                                                    "email": "pepe.segura@gmail.com",
+                                                    "role": "ADMIN"
+                                                }
+                                            ]
                                             """
                             )}
                     )}),
@@ -65,13 +167,13 @@ public class UsuarioController {
                             examples = {@ExampleObject(
                                     value = """
                                           {
-                                            "nombre": "Cristiano Ronaldo",
-                                            "username": "cr7",
-                                            "email": "cr7@triana.salesianos.com",
-                                            "password": "password123",
-                                            "role": "usuario",
-                                            "historicoCursos": []
-                                           }
+                                                    "id": 351,
+                                                    "nombre": "Rafa Hernandez",
+                                                    "username": "rafher",
+                                                    "password": "passwordrafher",
+                                                    "email": "rafa.hernandez@gmail.com",
+                                                    "role": "ADMIN"
+                                                }
                                             """
                             )}
                     )}),
@@ -84,7 +186,7 @@ public class UsuarioController {
         return GetUsuarioDto.of(usuarioService.findById(id));
     }
 
-    @Operation(summary = "Abre una incidencia de un usuario")
+    /*@Operation(summary = "Abre una incidencia de un usuario")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Se ha creado la incidencia",
@@ -100,7 +202,7 @@ public class UsuarioController {
     @PostMapping("/{id}/incidencia")
     public ResponseEntity<GetIncidenciaDto> abrirIncidencia(@PathVariable Long usuarioId, @RequestBody EditIncidenciaDto incidenciaDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(GetIncidenciaDto.of(usuarioService.abrirIncidencia(usuarioId, incidenciaDto)));
-    }
+    }*/
 
     @Operation(summary = "Crea un usuario")
     @ApiResponses(value = {
@@ -109,6 +211,17 @@ public class UsuarioController {
                     content = { @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
                             examples = {@ExampleObject(
+                                    value= """
+                                            {
+                                                 "id": 603,
+                                                 "nombre": "Cristiano Ronaldo",
+                                                 "username": "cr7",
+                                                 "password": "password123",
+                                                 "email": "cr7@triana.salesianos.com",
+                                                 "role": "ALUMNO",
+                                                 "incidencias": []
+                                             } 
+                                           """
                             )}
                     )}),
             @ApiResponse(responseCode = "404",
@@ -116,7 +229,21 @@ public class UsuarioController {
                     content = @Content),
     })
     @PostMapping
-    public ResponseEntity<Usuario> create(@RequestBody EditUsuarioDto nuevo) {
+    public ResponseEntity<Usuario> create(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Cuerpo del usuario a crear", required = true,
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = EditUsuarioDto.class),
+                            examples = @ExampleObject(value = """
+    {
+                                            "nombre": "Cristiano Ronaldo",
+                                            "username": "cr7",
+                                            "password": "password123",
+                                            "role": "ALUMNO",
+                                            "email": "cr7@triana.salesianos.com"
+                                        }  \s
+""")))
+            @RequestBody EditUsuarioDto nuevo) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(
                         usuarioService.save(nuevo));
@@ -129,7 +256,16 @@ public class UsuarioController {
                     content = {@Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = Incidencia.class)),
                             examples = {@ExampleObject(
-
+                            value= """
+                                    {
+                                         "id": 1,
+                                         "nombre": "Cristiano Messi",
+                                         "username": "cr7",
+                                         "password": "password123",
+                                         "email": "cr7@triana.salesianos.com",
+                                         "role": "ALUMNO"
+                                     }
+                                   """
                             )}
                     )}),
             @ApiResponse(responseCode = "404",
@@ -137,9 +273,24 @@ public class UsuarioController {
                     content = @Content),
     })
     @PutMapping("/{id}")
-    public ResponseEntity<Usuario> edit(@PathVariable Long id, @RequestBody EditUsuarioDto editUsuarioDto) {
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(usuarioService.edit(id, editUsuarioDto));
+    public ResponseEntity<GetUsuarioDto> edit(@PathVariable Long id,
+                                              @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                                                      description = "Cuerpo del usuario a editar", required = true,
+                                                      content = @Content(mediaType = "application/json",
+                                                              schema = @Schema(implementation = EditUsuarioDto.class),
+                                                              examples = @ExampleObject(value = """
+    {
+                                                                              "id": 1,
+                                                                              "nombre": "Cristiano Messi",
+                                                                              "username": "cr7",
+                                                                              "password": "password123",
+                                                                              "email": "cr7@triana.salesianos.com",
+                                                                              "role": "ALUMNO",
+                                                                              "incidencias": []
+                                                                          }
+""")))
+                                              @RequestBody EditUsuarioDto editUsuarioDto) {
+        return ResponseEntity.status(HttpStatus.OK).body(GetUsuarioDto.of(usuarioService.edit(id, editUsuarioDto)));
     }
 
     @Operation(summary = "Borra un usuario")

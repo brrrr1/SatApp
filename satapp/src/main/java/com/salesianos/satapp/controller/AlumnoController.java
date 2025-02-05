@@ -37,23 +37,106 @@ public class AlumnoController {
                             examples = {@ExampleObject(
                                     value = """
                                             [
-                                                 {
-                                                     "nombre": "Cristiano Ronaldo",
-                                                     "username": "cr7",
-                                                     "email": "cr7@triana.salesianos.com",
-                                                     "password": "password123",
-                                                     "role": "ALUMNO",
-                                                     "historicoCursos": []
-                                                 },
-                                                 {
-                                                               "nombre": "Bruno Delgado",
-                                                               "username": "br1",
-                                                               "email": "delgado.hebru24@triana.salesianos.com",
-                                                               "password": "777890",
-                                                               "role": "ALUMNO",
-                                                               "historicoCursos": []
-                                                 }
-                                             ]
+                                                {
+                                                    "nombre": "Moisés Dorado",
+                                                    "username": "moidor",
+                                                    "email": "moi.dor@gmail.com",
+                                                    "password": "passwordmoidor",
+                                                    "role": "USER",
+                                                    "historicoCursos": [
+                                                        {
+                                                            "curso": "1º",
+                                                            "cursoEscolar": "2019-2020"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "nombre": "Carlos Roman",
+                                                    "username": "carrom",
+                                                    "email": "carlos.roman@gmail.com",
+                                                    "password": "passwordcarrom",
+                                                    "role": "USER",
+                                                    "historicoCursos": [
+                                                        {
+                                                            "curso": "2º",
+                                                            "cursoEscolar": "2019-2020"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "nombre": "Manuel Maman",
+                                                    "username": "manmam",
+                                                    "email": "manuel.maman@gmail.com",
+                                                    "password": "passwordmanmam",
+                                                    "role": "USER",
+                                                    "historicoCursos": [
+                                                        {
+                                                            "curso": "1º",
+                                                            "cursoEscolar": "2019-2020"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "nombre": "Carlos Ruiz",
+                                                    "username": "carrui",
+                                                    "email": "carlos.ruiz@gmail.com",
+                                                    "password": "passwordcarrui",
+                                                    "role": "USER",
+                                                    "historicoCursos": [
+                                                        {
+                                                            "curso": "2º",
+                                                            "cursoEscolar": "2019-2020"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "nombre": "Pablo Camara",
+                                                    "username": "pabcam",
+                                                    "email": "pablo.camara@gmail.com",
+                                                    "password": "passwordpabcam",
+                                                    "role": "USER",
+                                                    "historicoCursos": [
+                                                        {
+                                                            "curso": "1º",
+                                                            "cursoEscolar": "2020-2021"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "nombre": "Pedro Sanchez",
+                                                    "username": "pedsan",
+                                                    "email": "pedro.sanchez@gmail.com",
+                                                    "password": "passwordpedsan",
+                                                    "role": "USER",
+                                                    "historicoCursos": [
+                                                        {
+                                                            "curso": "2º",
+                                                            "cursoEscolar": "2020-2021"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "nombre": "Alvaro Castilla",
+                                                    "username": "alvcas",
+                                                    "email": "alvaro.castilla@gmail.com",
+                                                    "password": "passwordalvcas",
+                                                    "role": "USER",
+                                                    "historicoCursos": [
+                                                        {
+                                                            "curso": "1º",
+                                                            "cursoEscolar": "2020-2021"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "nombre": "Cristiano Ronaldo",
+                                                    "username": "cr7",
+                                                    "email": "cr7@triana.salesianos.com",
+                                                    "password": "password123",
+                                                    "role": "ALUMNO",
+                                                    "historicoCursos": []
+                                                }
+                                            ]
                                             """
                             )}
                     )}),
@@ -77,13 +160,18 @@ public class AlumnoController {
                             examples = {@ExampleObject(
                                     value = """
                                           {
-                                            "nombre": "Cristiano Ronaldo",
-                                            "username": "cr7",
-                                            "email": "cr7@triana.salesianos.com",
-                                            "password": "password123",
-                                            "role": "ALUMNO",
-                                            "historicoCursos": []
-                                           }
+                                                    "nombre": "Pablo Camara",
+                                                    "username": "pabcam",
+                                                    "email": "pablo.camara@gmail.com",
+                                                    "password": "passwordpabcam",
+                                                    "role": "USER",
+                                                    "historicoCursos": [
+                                                        {
+                                                            "curso": "1º",
+                                                            "cursoEscolar": "2020-2021"
+                                                        }
+                                                    ]
+                                          }
                                             """
                             )}
                     )}),
@@ -141,7 +229,22 @@ public class AlumnoController {
                     content = @Content),
     })
     @PutMapping("/{id}")
-    public GetAlumnoDto update(@PathVariable Long id, @RequestBody EditAlumnoDto alumnoActualizado) {
+    public GetAlumnoDto update(@PathVariable Long id,
+                               @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                                       description = "Cuerpo del alumno", required = true,
+                                       content = @Content(mediaType = "application/json",
+                                               schema = @Schema(implementation = EditAlumnoDto.class),
+                                               examples = @ExampleObject(value = """
+    {
+        "nombre": "Messi",
+        "username": "cr7",
+        "email": "cr7@triana.salesianos.com",
+        "password": "password123",
+        "role": "ALUMNO",
+        "historicoCursos": []
+    }
+""")))
+                               @RequestBody EditAlumnoDto alumnoActualizado) {
         Alumno alumno = alumnoService.editAlumno(id, alumnoActualizado);
         return GetAlumnoDto.of(alumno);
     }

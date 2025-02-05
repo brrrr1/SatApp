@@ -5,7 +5,7 @@ Este proyecto es un sistema de gestión de incidencias diseñado para facilitar 
 
 ## Tecnologías utilizadas
 - **Backend:** Spring Boot (Java)
-- **Base de datos:** MySQL / PostgreSQL
+- **Base de datos:** PostgreSQL
 - **Contenedores:** Docker
 
 ## Estructura del Proyecto
@@ -18,46 +18,12 @@ Este proyecto es un sistema de gestión de incidencias diseñado para facilitar 
 
 ## Endpoints de la API
 
-### Incidencias
-- `GET /incidencia/{id}` - Obtiene una incidencia por su ID
-- `PUT /incidencia/{id}` - Edita una incidencia
-- `DELETE /incidencia/{id}` - Borra una incidencia
-- `PUT /incidencia/{id}/estado/` - Edita el estado de una incidencia
-- `GET /incidencia/` - Obtiene todas las incidencias
-- `POST /incidencia/` - Crea una incidencia
-- `GET /incidencia/{alumnoId}/incidencias` - Obtiene incidencias de un alumno
-
 ### Ubicación
 - `GET /ubicacion/{id}` - Obtiene una ubicación
 - `PUT /ubicacion/{id}` - Edita una ubicación
 - `DELETE /ubicacion/{id}` - Borra una ubicación
 - `GET /ubicacion/` - Obtiene todas las ubicaciones
 - `POST /ubicacion/` - Crea una ubicación
-
-### Personal
-- `GET /personal/` - Obtiene todos los miembros del personal
-- `POST /personal/` - Crea un miembro del personal
-- `GET /personal/{id}` - Obtiene un miembro del personal
-
-### Técnico
-- `PUT /tecnico/incidencia/{id}` - Edita una incidencia
-- `GET /tecnico/` - Obtiene todos los técnicos
-- `POST /tecnico/` - Crea un técnico
-- `GET /tecnico/{id}` - Obtiene un técnico
-
-### Nota
-- `PUT /nota/{notaId}` - Edita una nota
-- `POST /nota/{incidenciaId}` - Crea una nota
-- `GET /nota/{id}` - Obtiene una nota
-- `GET /nota/` - Obtiene todas las notas
-
-### Alumno
-- `GET /alumno/{id}` - Obtiene un alumno por su ID
-- `PUT /alumno/{id}` - Edita un alumno
-- `DELETE /alumno/{id}` - Borra un alumno
-- `POST /alumno/{alumnoId}/historico` - Crea el histórico de cursos de un alumno
-- `GET /alumno/` - Obtiene todos los alumnos
-- `POST /alumno/` - Crea un alumno
 
 ### Equipo
 - `GET /equipo/{id}` - Obtiene un equipo
@@ -74,9 +40,43 @@ Este proyecto es un sistema de gestión de incidencias diseñado para facilitar 
 - `GET /usuario/` - Obtiene todos los usuarios
 - `POST /usuario/` - Crea un usuario
 
+### Alumno
+- `GET /alumno/{id}` - Obtiene un alumno por su ID
+- `PUT /alumno/{id}` - Edita un alumno
+- `DELETE /alumno/{id}` - Borra un alumno
+- `POST /alumno/{alumnoId}/historico` - Crea el histórico de cursos de un alumno
+- `GET /alumno/` - Obtiene todos los alumnos
+- `POST /alumno/` - Crea un alumno
+
+### Técnico
+- `PUT /tecnico/incidencia/{id}` - Edita una incidencia
+- `GET /tecnico/` - Obtiene todos los técnicos
+- `POST /tecnico/` - Crea un técnico
+- `GET /tecnico/{id}` - Obtiene un técnico
+
+### Personal
+- `GET /personal/` - Obtiene todos los miembros del personal
+- `POST /personal/` - Crea un miembro del personal
+- `GET /personal/{id}` - Obtiene un miembro del personal
+
 ### Categoría
 - `GET /categoria/{id}` - Obtiene una categoría
 - `PUT /categoria/{id}` - Edita una categoría
 - `DELETE /categoria/{id}` - Borra una categoría
 - `GET /categoria/` - Obtiene todas las categorías
 - `POST /categoria/` - Crea una categoría
+
+### Incidencias
+- `GET /incidencia/{id}` - Obtiene una incidencia por su ID
+- `PUT /incidencia/{id}` - Edita una incidencia
+- `DELETE /incidencia/{id}` - Borra una incidencia
+- `PUT /incidencia/{id}/estado/` - Edita el estado de una incidencia
+- `GET /incidencia/` - Obtiene todas las incidencias
+- `POST /incidencia/` - Crea una incidencia
+- `GET /incidencia/{alumnoId}/incidencias` - Obtiene incidencias de un alumno
+
+### Nota
+- `PUT /nota/{notaId}` - Edita una nota
+- `POST /nota/{incidenciaId}` - Crea una nota
+- `GET /nota/{id}` - Obtiene una nota
+- `GET /nota/` - Obtiene todas las notas

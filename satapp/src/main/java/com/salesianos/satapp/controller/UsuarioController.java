@@ -1,10 +1,7 @@
 package com.salesianos.satapp.controller;
 
-import com.salesianos.satapp.dto.EditIncidenciaDto;
 import com.salesianos.satapp.dto.EditUsuarioDto;
-import com.salesianos.satapp.dto.GetIncidenciaDto;
 import com.salesianos.satapp.dto.GetUsuarioDto;
-import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.model.Usuario;
 import com.salesianos.satapp.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -163,7 +160,7 @@ public class UsuarioController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha encontrado el usuario",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetUsuarioDto.class)),
                             examples = {@ExampleObject(
                                     value = """
                                           {
@@ -209,7 +206,7 @@ public class UsuarioController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha creado el usuario",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = Usuario.class)),
                             examples = {@ExampleObject(
                                     value= """
                                             {
@@ -254,7 +251,7 @@ public class UsuarioController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha editado el usuario",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = Incidencia.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetUsuarioDto.class)),
                             examples = {@ExampleObject(
                             value= """
                                     {
@@ -298,7 +295,7 @@ public class UsuarioController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha eliminado el usuario",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = Incidencia.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = Usuario.class)),
                             examples = {@ExampleObject(
 
                             )}

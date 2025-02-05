@@ -43,7 +43,7 @@ public class PersonalService {
                 .build());
     }
 
-    public void delete(Long id) {
+    /*public void delete(Long id) {
         personalRepository.deleteById(id);
-    }
+    }*/
 }

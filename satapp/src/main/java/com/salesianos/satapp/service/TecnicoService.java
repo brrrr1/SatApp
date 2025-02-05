@@ -60,8 +60,8 @@ public class TecnicoService {
     }
 
 
-    public void delete(Long id) {
+    /*public void delete(Long id) {
         tecnicoRepository.deleteById(id);
-    }
+    }*/
 
 }

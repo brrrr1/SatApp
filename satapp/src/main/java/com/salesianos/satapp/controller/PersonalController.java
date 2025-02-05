@@ -1,8 +1,6 @@
 package com.salesianos.satapp.controller;
 
 import com.salesianos.satapp.dto.EditPersonalDto;
-import com.salesianos.satapp.dto.GetAlumnoDto;
-import com.salesianos.satapp.dto.GetIncidenciaDto;
 import com.salesianos.satapp.dto.GetPersonalDto;
 import com.salesianos.satapp.model.Personal;
 import com.salesianos.satapp.service.PersonalService;
@@ -31,7 +29,7 @@ public class PersonalController {
             @ApiResponse(responseCode = "200",
                     description = "Se han encontrado los miembros del personal",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetAlumnoDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetPersonalDto.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             [
@@ -72,7 +70,7 @@ public class PersonalController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha encontrado el miembro del personal",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetPersonalDto.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             {
@@ -101,7 +99,7 @@ public class PersonalController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha creado el miembro del personal",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetPersonalDto.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             {

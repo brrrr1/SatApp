@@ -216,7 +216,7 @@ public class EquipoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha editado el equipo",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = EditEquipoDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetEquipoDto.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             {

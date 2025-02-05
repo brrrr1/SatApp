@@ -118,9 +118,9 @@ public class IncidenciaService {
         incidenciaRepository.deleteById(id);
     }
 
-    /*public Incidencia editIncidencia(Incidencia incidencia) {
+    public Incidencia editIncidencia(Incidencia incidencia) {
         return incidenciaRepository.save(incidencia);
-    }*/
+    }
 
     public Incidencia editIncidenciaUser(Incidencia incidencia, Long id) {
         return incidenciaRepository.findById(id)
@@ -141,11 +141,11 @@ public class IncidenciaService {
 
 
 
-    public Incidencia cambiarEstado(Long id, Estado estado) {
+    /*public Incidencia cambiarEstado(Long id, Estado estado) {
         Incidencia incidencia = findById(id);
         incidencia.setEstado(estado);
         return incidenciaRepository.save(incidencia);
-    }
+    }*/
 
 
     public List<Incidencia> getIncidenciasByAlumno(Long alumnoId) {
@@ -156,8 +156,8 @@ public class IncidenciaService {
         return incidenciaRepository.findByFechaBetween(startDate, endDate).stream().map(GetIncidenciaDto::of).toList();
     }
 
-    public List<Incidencia> getIncidenciasByUsuarioAndEstado(Long usuarioId, String estado) {
+    /*public List<Incidencia> getIncidenciasByUsuarioAndEstado(Long usuarioId, String estado) {
         return incidenciaRepository.findByUsuarioIdAndEstado(usuarioId, estado);
-    }
+    }*/
 
 }

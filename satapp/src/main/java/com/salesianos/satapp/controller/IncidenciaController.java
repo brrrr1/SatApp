@@ -2,7 +2,6 @@ package com.salesianos.satapp.controller;
 
 import com.salesianos.satapp.dto.CreateIncidenciaDto;
 import com.salesianos.satapp.dto.GetIncidenciaDto;
-import com.salesianos.satapp.model.Estado;
 import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.service.IncidenciaService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -202,7 +201,7 @@ public class IncidenciaController {
                     content = @Content),
     })
     @PutMapping("/{id}")
-    public Incidencia editUser(
+    public GetIncidenciaDto editUser(
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Cuerpo de la incidencia a editar", required = true,
                     content = @Content(mediaType = "application/json",
@@ -241,7 +240,7 @@ public class IncidenciaController {
                                             }
 """)))
             @RequestBody Incidencia incidencia, @PathVariable Long id) {
-        return incidenciaService.editIncidenciaUser(incidencia, id);
+        return GetIncidenciaDto.of(incidenciaService.editIncidenciaUser(incidencia, id));
     }
 
     /*@Operation(summary = "Edita el estado de una incidencia")

@@ -1,10 +1,8 @@
 package com.salesianos.satapp.controller;
 
-import com.salesianos.satapp.dto.EditIncidenciaDto;
 import com.salesianos.satapp.dto.EditTecnicoDto;
 import com.salesianos.satapp.dto.GetIncidenciaDto;
 import com.salesianos.satapp.dto.GetTecnicoDto;
-import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.model.Tecnico;
 import com.salesianos.satapp.service.IncidenciaService;
 import com.salesianos.satapp.service.TecnicoService;
@@ -17,7 +15,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -123,7 +120,7 @@ public class TecnicoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha creado el técnico",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetTecnicoDto.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             {

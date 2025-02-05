@@ -1,7 +1,6 @@
 package com.salesianos.satapp.controller;
 
 import com.salesianos.satapp.dto.*;
-import com.salesianos.satapp.model.Nota;
 import com.salesianos.satapp.service.NotaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;

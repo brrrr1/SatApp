@@ -1,7 +1,6 @@
 package com.salesianos.satapp.controller;
 
 import com.salesianos.satapp.dto.*;
-import com.salesianos.satapp.model.Categoria;
 import com.salesianos.satapp.model.Ubicacion;
 import com.salesianos.satapp.service.UbicacionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/ubicacion/")
@@ -74,7 +72,7 @@ public class UbicacionController {
         return GetUbicacionDto.of(ubicacionService.findById(id).get());
     }
 
-    @Operation(summary = "Crea una ubicación (DA CÓDIGO 500 PERO SE CREA EXITOSAMENTE)")
+    @Operation(summary = "Crea una ubicación")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
                     description = "Se ha creado la ubicación",

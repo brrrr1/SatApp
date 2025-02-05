@@ -264,7 +264,7 @@ public class CategoriaController {
             @ApiResponse(responseCode = "201",
                     description = "Se ha creado la categoría",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = CreateCategoriaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             {
@@ -306,7 +306,7 @@ public class CategoriaController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha editado la categoría",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = CreateCategoriaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             {
@@ -332,13 +332,14 @@ public class CategoriaController {
     {
         "id": 1,
         "nombre": "Enchufes",
-        "nombreCategoriaPadre": [],
-        "listaCategoriasHijas": []
+        "categoriaPadreId": null,
+        "listaCategoriasHijasIds": []
     }
-""")))
-                                            @RequestBody CreateCategoriaDto categoria) {
-        return ResponseEntity.status(HttpStatus.OK).body(categoriaService.update(id, categoria));
+    """)))
+                                            @RequestBody CreateCategoriaDto categoriaDto) {
+        return ResponseEntity.ok(categoriaService.update(id, categoriaDto));
     }
+
 
     @Operation(summary = "Borra una categoría")
     @ApiResponses(value = {

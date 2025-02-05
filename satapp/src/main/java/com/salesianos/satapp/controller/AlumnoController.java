@@ -187,7 +187,7 @@ public class AlumnoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha creado el alumno",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = EditAlumnoDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetAlumnoDto.class)),
                             examples = {@ExampleObject(
                                     value = """
                                                  {
@@ -234,7 +234,7 @@ public class AlumnoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha editado el alumno",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = EditAlumnoDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetAlumnoDto.class)),
                             examples = {@ExampleObject(
 
                             )}
@@ -269,7 +269,7 @@ public class AlumnoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha creado el histórico de cursos del alumno",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = EditHistoricoCursosDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetHistoricoCursosDto.class)),
                             examples = {@ExampleObject(
                             )}
                     )}),

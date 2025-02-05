@@ -45,7 +45,7 @@ public class EquipoService {
                 incidencia.setEquipo(null);
                 incidenciaRepository.save(incidencia);
             }
-            
+
             equipoRepository.deleteById(id);
         } else {
             throw new EquipoNotFoundException("No se ha encontrado ningún equipo con ese id");

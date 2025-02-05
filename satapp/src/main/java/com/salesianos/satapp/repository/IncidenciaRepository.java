@@ -21,10 +21,11 @@ public interface IncidenciaRepository extends JpaRepository<Incidencia, Long> {
 
     @Query("""
         SELECT n
-        FROM Nota n
-        WHERE n.id = ?1
-           """)
-    Optional<Nota> findByIdNota(Long id);
+        FROM Incidencia i
+        JOIN i.notas n
+        WHERE n.id = :id
+    """)
+    Optional<Nota> findByIdNota(@Param("id") Long id);
 
     @Query("""
     SELECT i FROM Incidencia i 

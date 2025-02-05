@@ -2,9 +2,12 @@ package com.salesianos.satapp.dto;
 
 import com.salesianos.satapp.model.Nota;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public record GetNotaDto(
         Long incidenciaId,
-        java.time.LocalDateTime fecha,
+        LocalDate fecha,
         String contenido,
         String autor
 ) {

@@ -1,6 +1,9 @@
 package com.salesianos.satapp.service;
 
+import com.salesianos.satapp.dto.CreateCategoriaDto;
 import com.salesianos.satapp.dto.CreateNotaDto;
+import com.salesianos.satapp.error.NotaNotFoundException;
+import com.salesianos.satapp.model.Categoria;
 import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.model.Nota;
 import com.salesianos.satapp.repository.IncidenciaRepository;
@@ -9,7 +12,9 @@ import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
@@ -22,7 +27,7 @@ public class NotaService {
         List<Nota> notas = incidenciaRepository.findAllNotas();
 
         if(notas.isEmpty()) {
-            throw new EntityNotFoundException("No se han encontrado notas");
+            throw new NotaNotFoundException("No se han encontrado notas");
         }
 
         return notas;
@@ -30,16 +35,16 @@ public class NotaService {
     }
 
     public Nota findNotaById(Long id) {
-        return incidenciaRepository.findByIdNota(id).orElseThrow(() -> new EntityNotFoundException("No se ha encontrado la nota"));
+        return incidenciaRepository.findByIdNota(id).orElseThrow(() -> new NotaNotFoundException("No se ha encontrado una nota con ese id"));
     }
 
     public Nota saveNota(Long incidenciaId, CreateNotaDto notaNueva) {
 
         Incidencia incidencia = incidenciaRepository.findById(incidenciaId)
-                .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado la incidencia"));
+                .orElseThrow(() -> new NotaNotFoundException("No se ha encontrado una incidencia con ese id"));
 
         Nota nota = Nota.builder()
-                .fecha(java.time.LocalDateTime.now())
+                .fecha(LocalDate.from(notaNueva.fecha()))
                 .contenido(notaNueva.contenido())
                 .autor(notaNueva.autor())
                 .incidencia(incidencia)
@@ -52,27 +57,21 @@ public class NotaService {
         return nota;
     }
 
-    public Nota editNota(Long notaId, CreateNotaDto notaNueva) {
+    public Nota update(Long notaId, CreateNotaDto notaNueva) {
+        Optional<Nota> nota = incidenciaRepository.findByIdNota(notaId);
 
-        Nota nota = incidenciaRepository.findByIdNota(notaId)
-                .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado la nota"));
+        if (nota.isEmpty()) {
+            throw new NotaNotFoundException("No se ha encontrado una nota con ese id");
+        }
 
-        nota.setAutor(notaNueva.autor());
-        nota.setContenido(notaNueva.contenido());
-        nota.setIncidencia(nota.getIncidencia());
+        nota.get().setAutor(notaNueva.autor());
+        nota.get().setFecha(LocalDate.from(notaNueva.fecha()));
+        nota.get().setContenido(notaNueva.contenido());
+        nota.get().setIncidencia(nota.get().getIncidencia());
 
-        incidenciaRepository.save(nota.getIncidencia());
+        incidenciaRepository.save(nota.get().getIncidencia());
 
-        return nota;
-    }
-
-    public void deleteById(Long id) {
-
-        Incidencia incidencia = incidenciaRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("No se ha encontrado la incidencia con id: " + id));
-
-        incidencia.removeNota(findNotaById(id));
-        incidenciaRepository.save(incidencia);
+        return nota.get();
     }
 
 }

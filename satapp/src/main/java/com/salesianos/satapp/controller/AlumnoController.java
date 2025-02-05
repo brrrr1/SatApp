@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @RestController
 @RequestMapping("/alumno/")
 @RequiredArgsConstructor
@@ -47,20 +46,20 @@ public class AlumnoController {
                                                      "historicoCursos": []
                                                  },
                                                  {
-                                                     "nombre": "Cristiano Ronaldo",
-                                                     "username": "cr7",
-                                                     "email": "cr7@triana.salesianos.com",
-                                                     "password": "password123",
-                                                     "role": "ALUMNO",
-                                                     "historicoCursos": []
+                                                               "nombre": "Bruno Delgado",
+                                                               "username": "br1",
+                                                               "email": "delgado.hebru24@triana.salesianos.com",
+                                                               "password": "777890",
+                                                               "role": "ALUMNO",
+                                                               "historicoCursos": []
                                                  }
                                              ]
                                             """
                             )}
                     )}),
             @ApiResponse(responseCode = "404",
-                    description = "No se han encontrado alumnos"
-            )
+                    description = "No se ha encontrado ningun alumno",
+                    content = @Content),
     })
     @GetMapping
     public List<GetAlumnoDto> getAll(){
@@ -104,6 +103,17 @@ public class AlumnoController {
                     content = { @Content(mediaType = "application/json",
                             array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
                             examples = {@ExampleObject(
+                                    value = """
+                                                 {
+                                                               "nombre": "Cristiano Ronaldo",
+                                                               "username": "cr7",
+                                                               "email": "cr7@gmail.com",
+                                                                "password": "password123",
+                                                                "role": "ALUMNO",
+                                                                "historicoCursos": []
+                                                 }
+                                            """
+
                             )}
                     )}),
             @ApiResponse(responseCode = "404",

@@ -44,7 +44,7 @@ public class IncidenciaController {
                                                       "fecha": "29/01",
                                                       "titulo": "Aire acondicionado 2DAM",
                                                       "descripcion": "El aire acondicionado en la clase de 2DAM no va desde Octubre. Además, no hay mando.",
-                                                      "estado": "Abierta",
+                                                      "estado": "ABIERTA",
                                                       "urgencia": "Muy urgente"
                                                       
                                                   },
@@ -53,7 +53,7 @@ public class IncidenciaController {
                                                       "fecha": "30/01",
                                                       "titulo": "Proyector 1AyF",
                                                       "descripcion": "El proyector en la clase de 1AyF ha dejado de funcionar.",
-                                                      "estado": "Abierta",
+                                                      "estado": "ABIERTA",
                                                       "urgencia": "Para YA"
                                                       
                                                   }
@@ -83,7 +83,7 @@ public class IncidenciaController {
                                                       "fecha": "29/01",
                                                       "titulo": "Aire acondicionado 2DAM",
                                                       "descripcion": "El aire acondicionado en la clase de 2DAM no va desde Octubre. Además, no hay mando.",
-                                                      "estado": "Abierta",
+                                                      "estado": "ABIERTA",
                                                       "urgencia": "Muy urgente"
                                                       
                                             }
@@ -161,10 +161,7 @@ public class IncidenciaController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha eliminado la incidencia",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = Incidencia.class)),
-                            examples = {@ExampleObject(
-
-                            )}
+                            array = @ArraySchema(schema = @Schema(implementation = Incidencia.class))
                     )}),
             @ApiResponse(responseCode = "404",
                     description = "No se ha podido borrar la incidencia",

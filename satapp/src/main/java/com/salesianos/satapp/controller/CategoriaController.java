@@ -1,11 +1,8 @@
 package com.salesianos.satapp.controller;
 
 import com.salesianos.satapp.dto.CreateCategoriaDto;
-import com.salesianos.satapp.dto.EditAlumnoDto;
 import com.salesianos.satapp.dto.GetCategoriaDto;
-import com.salesianos.satapp.dto.GetIncidenciaDto;
 import com.salesianos.satapp.model.Categoria;
-import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.service.CategoriaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -17,7 +14,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,7 +32,7 @@ public class CategoriaController {
             @ApiResponse(responseCode = "200",
                     description = "Se han encontrado las categorías",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetCategoriaDto.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             [
@@ -268,7 +264,7 @@ public class CategoriaController {
             @ApiResponse(responseCode = "201",
                     description = "Se ha creado la categoría",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetCategoriaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = CreateCategoriaDto.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             {
@@ -310,7 +306,7 @@ public class CategoriaController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha editado la categoría",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetCategoriaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = CreateCategoriaDto.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             {

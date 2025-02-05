@@ -1,10 +1,7 @@
 package com.salesianos.satapp.controller;
 
-import com.salesianos.satapp.dto.GetCategoriaDto;
 import com.salesianos.satapp.dto.GetEquipoDto;
 import com.salesianos.satapp.dto.EditEquipoDto;
-import com.salesianos.satapp.dto.GetIncidenciaDto;
-import com.salesianos.satapp.model.Categoria;
 import com.salesianos.satapp.model.Equipo;
 import com.salesianos.satapp.service.EquipoService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -219,7 +216,7 @@ public class EquipoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha editado el equipo",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetEquipoDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = EditEquipoDto.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             {

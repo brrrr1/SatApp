@@ -1,6 +1,6 @@
 package com.salesianos.satapp.dto;
 
-import com.salesianos.satapp.model.Estado;
+import com.salesianos.satapp.model.*;
 
 import java.time.LocalDateTime;
 
@@ -10,8 +10,9 @@ public record EditIncidenciaDto(
         String descripcion,
         String urgencia,
         Estado estado,
-        Long ubicacionId,
-        Long equipoId,
-        Long usuarioId
+        Ubicacion ubicacion,
+        Equipo equipo,
+        Categoria categoria,
+        Usuario usuario
 ) {
 }

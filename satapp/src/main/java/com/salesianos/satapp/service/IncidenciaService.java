@@ -1,6 +1,7 @@
 package com.salesianos.satapp.service;
 
 import com.salesianos.satapp.dto.CreateIncidenciaDto;
+import com.salesianos.satapp.dto.GetIncidenciaDto;
 import com.salesianos.satapp.model.Estado;
 import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.repository.IncidenciaRepository;
@@ -77,8 +78,8 @@ public class IncidenciaService {
         return incidenciaRepository.findByAlumnoId(alumnoId);
     }
 
-    public List<Incidencia> getIncidenciasByFecha(LocalDateTime startDate, LocalDateTime endDate) {
-        return incidenciaRepository.findByFechaBetween(startDate, endDate);
+    public List<GetIncidenciaDto> getIncidenciasByFecha(LocalDateTime startDate, LocalDateTime endDate) {
+        return incidenciaRepository.findByFechaBetween(startDate, endDate).stream().map(GetIncidenciaDto::of).toList();
     }
 
     public List<Incidencia> getIncidenciasByUsuarioAndEstado(Long usuarioId, String estado) {

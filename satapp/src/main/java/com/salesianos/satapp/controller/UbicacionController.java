@@ -78,7 +78,7 @@ public class UbicacionController {
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    @Operation(summary = "Crea una ubicación")
+    @Operation(summary = "Crea una ubicación (DA CÓDIGO 500 PERO SE CREA EXITOSAMENTE)")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201",
                     description = "Se ha creado la ubicación",

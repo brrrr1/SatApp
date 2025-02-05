@@ -121,7 +121,10 @@ public class AlumnoController {
                     content = @Content),
     })
     @PostMapping
-    public GetAlumnoDto saveAlumno(@RequestBody EditAlumnoDto alumnoNuevo) {
+    public GetAlumnoDto saveAlumno
+            (@io.swagger.v3.oas.annotations.parameters.RequestBody(description = "El objeto alumno que se va a crear",
+                    content = @Content(schema = @Schema(implementation = EditAlumnoDto.class)))
+                    @RequestBody EditAlumnoDto alumnoNuevo) {
         Alumno alumno = alumnoService.saveAlumno(alumnoNuevo);
         return GetAlumnoDto.of(alumno);
     }

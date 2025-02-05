@@ -212,7 +212,7 @@ public class IncidenciaController {
                     description = "No se han encontrado incidencias para ese usuario",
                     content = @Content),
     })
-    @GetMapping("/{alumnoId}")
+    @GetMapping("/{alumnoId}/incidencias")
     public List<Incidencia> getIncidencias(@PathVariable Long alumnoId) {
         return incidenciaService.getIncidenciasByAlumno(alumnoId);
     }

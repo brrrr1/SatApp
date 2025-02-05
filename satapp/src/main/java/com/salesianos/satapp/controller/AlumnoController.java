@@ -156,7 +156,7 @@ public class AlumnoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha encontrado el alumno",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetAlumnoDto.class)),
                             examples = {@ExampleObject(
                                     value = """
                                           {
@@ -189,7 +189,7 @@ public class AlumnoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha creado el alumno",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = EditAlumnoDto.class)),
                             examples = {@ExampleObject(
                                     value = """
                                                  {
@@ -236,7 +236,7 @@ public class AlumnoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha editado el alumno",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = Incidencia.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = EditAlumnoDto.class)),
                             examples = {@ExampleObject(
 
                             )}
@@ -271,7 +271,7 @@ public class AlumnoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha creado el histórico de cursos del alumno",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = EditHistoricoCursosDto.class)),
                             examples = {@ExampleObject(
                             )}
                     )}),
@@ -302,7 +302,7 @@ public class AlumnoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha eliminado el alumno",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = Incidencia.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = Alumno.class)),
                             examples = {@ExampleObject(
 
                             )}
@@ -312,7 +312,7 @@ public class AlumnoController {
                     content = @Content),
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         alumnoService.delete(id);
         return ResponseEntity.noContent().build();
     }

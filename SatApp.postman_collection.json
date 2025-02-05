@@ -3,8 +3,8 @@
 		"_postman_id": "af86c9e9-45f8-41f6-afc7-50fe0ef96de7",
 		"name": "SatApp",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "38617670",
-		"_collection_link": "https://satapp-bruno-moiss.postman.co/workspace/SatApp-Bruno-Mois%C3%A9s-Workspace~1813d32a-fe64-4226-b6f7-20f01197d934/collection/38617679-af86c9e9-45f8-41f6-afc7-50fe0ef96de7?action=share&source=collection_link&creator=38617670"
+		"_exporter_id": "38617679",
+		"_collection_link": "https://satapp-bruno-moiss.postman.co/workspace/SatApp-Bruno-Mois%C3%A9s-Workspace~1813d32a-fe64-4226-b6f7-20f01197d934/collection/38617679-af86c9e9-45f8-41f6-afc7-50fe0ef96de7?action=share&source=collection_link&creator=38617679"
 	},
 	"item": [
 		{
@@ -678,28 +678,6 @@
 							"path": [
 								"categoria",
 								""
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "deleteCategoria",
-					"request": {
-						"auth": {
-							"type": "noauth"
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "localhost:8080/categoria/1",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"categoria",
-								"1"
 							]
 						}
 					},

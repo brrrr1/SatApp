@@ -42,4 +42,6 @@ public interface IncidenciaRepository extends JpaRepository<Incidencia, Long> {
     List<Incidencia> findByUsuarioIdAndEstado(Long usuarioId, String estado);
 
     List<Incidencia> findByEquipoId(Long id);
+
+    List<Incidencia> findByUbicacionId(Long idUbi);
 }

@@ -47,10 +47,8 @@ public class UbicacionController {
                     content = @Content),
     })
     @GetMapping
-    public List<GetUbicacionDto> findAll() {
-        return ubicacionService.findAll().stream()
-                .map(GetUbicacionDto::of)
-                .collect(Collectors.toList());
+    public ResponseEntity<List<GetUbicacionDto>> findAll() {
+        return ResponseEntity.ok(ubicacionService.findAll().stream().map(GetUbicacionDto::of).collect(Collectors.toList()));
     }
 
     @Operation(summary = "Obtiene una ubicación")

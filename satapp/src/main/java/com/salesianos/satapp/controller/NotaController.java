@@ -158,7 +158,7 @@ public class NotaController {
                     content = @Content),
     })
     @PostMapping("/{id}")
-    public ResponseEntity<GetNotaDto> saveNota(@PathVariable Long incidenciaId,
+    public ResponseEntity<GetNotaDto> saveNota(@PathVariable Long id,
                                                @io.swagger.v3.oas.annotations.parameters.RequestBody(
                                                        description = "Cuerpo de la nota a crear", required = true,
                                                        content = @Content(mediaType = "application/json",
@@ -174,7 +174,7 @@ public class NotaController {
                                                                            }
 """)))
                                                @RequestBody CreateNotaDto nota) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(GetNotaDto.of(notaService.saveNota(incidenciaId, nota)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(GetNotaDto.of(notaService.saveNota(id, nota)));
     }
 
     @Operation(summary = "Edita una nota")

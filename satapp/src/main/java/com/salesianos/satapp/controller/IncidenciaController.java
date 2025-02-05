@@ -151,8 +151,8 @@ public class IncidenciaController {
                     content = @Content),
     })
     @PutMapping("/{id}/estado/")
-    public Incidencia cambiarEstado(@PathVariable Long id, Estado estado) {
-        return incidenciaService.cambiarEstado(id, estado);
+    public GetIncidenciaDto cambiarEstado(@PathVariable Long id, Estado estado) {
+        return GetIncidenciaDto.of(incidenciaService.cambiarEstado(id, estado));
     }
 
 
@@ -210,8 +210,8 @@ public class IncidenciaController {
                     content = @Content),
     })
     @GetMapping("/{alumnoId}/incidencias")
-    public List<Incidencia> getIncidencias(@PathVariable Long alumnoId) {
-        return incidenciaService.getIncidenciasByAlumno(alumnoId);
+    public List<GetIncidenciaDto> getIncidencias(@PathVariable Long alumnoId) {
+        return incidenciaService.getIncidenciasByAlumno(alumnoId).stream().map(GetIncidenciaDto::of).toList();
     }
 
     @ApiResponses(value = {
@@ -249,7 +249,7 @@ public class IncidenciaController {
                     content = @Content),
     })
     @GetMapping("/filtrar")
-    public ResponseEntity<List<Incidencia>> getIncidenciasByFecha(
+    public ResponseEntity<List<GetIncidenciaDto>> getIncidenciasByFecha(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) {
         return ResponseEntity.ok(incidenciaService.getIncidenciasByFecha(startDate, endDate));

@@ -46,6 +46,9 @@ public class UsuarioService {
                 .urgencia(incidenciaDto.urgencia())
                 .estado(incidenciaDto.estado())
                 .usuario(optionalUsuario.get())
+                .categoria(incidenciaDto.categoria())
+                .equipo(incidenciaDto.equipo())
+                .ubicacion(incidenciaDto.ubicacion())
                 .build();
 
         incidenciaRepository.save(incidencia);

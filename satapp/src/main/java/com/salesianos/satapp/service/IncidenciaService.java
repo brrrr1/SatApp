@@ -2,6 +2,7 @@ package com.salesianos.satapp.service;
 
 import com.salesianos.satapp.dto.CreateIncidenciaDto;
 import com.salesianos.satapp.dto.GetIncidenciaDto;
+import com.salesianos.satapp.error.IncidenciaNotFoundException;
 import com.salesianos.satapp.model.Estado;
 import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.repository.IncidenciaRepository;
@@ -61,7 +62,7 @@ public class IncidenciaService {
 
                     return incidenciaRepository.save(old);
                 })
-                .orElseThrow(() -> new EntityNotFoundException("No hay incidencia con ID: "+ id));
+                .orElseThrow(() -> new IncidenciaNotFoundException("No se ha encontrado ninguna incidencia con ese id"));
 
     }
 

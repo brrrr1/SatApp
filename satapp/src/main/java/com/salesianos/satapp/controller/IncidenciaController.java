@@ -156,7 +156,6 @@ public class IncidenciaController {
     })
     @PostMapping
     public ResponseEntity<GetIncidenciaDto> create (
-
             @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Cuerpo de la incidencia a crear", required = true,
                     content = @Content(mediaType = "application/json",

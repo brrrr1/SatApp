@@ -1,6 +1,7 @@
 package com.salesianos.satapp.service;
 
 import com.salesianos.satapp.dto.EditPersonalDto;
+import com.salesianos.satapp.error.PersonalNotFoundException;
 import com.salesianos.satapp.model.Personal;
 import com.salesianos.satapp.repository.PersonalRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -18,14 +19,14 @@ public class PersonalService {
     public List<Personal> findAll(){
         List<Personal> result = personalRepository.findAll();
         if(result.isEmpty())
-            throw new EntityNotFoundException("No hay personal con esos criterios de busqueda");
+            throw new PersonalNotFoundException("No se encontraron personal");
         return result;
     }
 
     public Personal findById(Long id) {
         Optional<Personal> result = personalRepository.findById(id);
         if(result.isEmpty())
-            throw new EntityNotFoundException("No se encontró personal con ese id");
+            throw new PersonalNotFoundException("No se ha encontrado el personal con id: " + id);
         else {
             return result.get();
         }

@@ -4,6 +4,7 @@ import com.salesianos.satapp.dto.EditAlumnoDto;
 import com.salesianos.satapp.dto.EditHistoricoCursosDto;
 import com.salesianos.satapp.dto.EditIncidenciaDto;
 import com.salesianos.satapp.dto.EditUsuarioDto;
+import com.salesianos.satapp.error.UsuarioNotFoundException;
 import com.salesianos.satapp.model.Alumno;
 import com.salesianos.satapp.model.HistoricoCursos;
 import com.salesianos.satapp.model.Incidencia;
@@ -27,7 +28,7 @@ public class UsuarioService {
     public List<Usuario> findAll(){
         List<Usuario> result = usuarioRepository.findAll();
         if(result.isEmpty())
-            throw new EntityNotFoundException("No hay usuarios con esos criterios de busqueda");
+            throw new UsuarioNotFoundException("No se encontraron usuarios");
         return result;
     }
 
@@ -36,7 +37,7 @@ public class UsuarioService {
         Optional<Usuario> optionalUsuario = usuarioRepository.findById(usuarioId);
 
         if (optionalUsuario.isEmpty()) {
-            throw new EntityNotFoundException("Usuario no encontrado");
+            throw new UsuarioNotFoundException("No se ha encontrado el usuario con id: " + usuarioId);
         }
 
         Incidencia incidencia =  Incidencia.builder()
@@ -63,7 +64,7 @@ public class UsuarioService {
     public Usuario findById(Long id) {
         Optional<Usuario> result = usuarioRepository.findById(id);
         if(result.isEmpty())
-            throw new EntityNotFoundException("No se encontraron usuarios con ese id");
+            throw new UsuarioNotFoundException("No se ha encontrado el usuario con id: " + id);
         else {
             return result.get();
         }

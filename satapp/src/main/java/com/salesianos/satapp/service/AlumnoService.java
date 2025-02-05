@@ -2,6 +2,7 @@ package com.salesianos.satapp.service;
 
 import com.salesianos.satapp.dto.EditAlumnoDto;
 import com.salesianos.satapp.dto.EditHistoricoCursosDto;
+import com.salesianos.satapp.error.AlumnoNotFoundException;
 import com.salesianos.satapp.model.Alumno;
 import com.salesianos.satapp.model.HistoricoCursos;
 import com.salesianos.satapp.repository.AlumnoRepository;
@@ -20,14 +21,14 @@ public class AlumnoService {
     public List<Alumno> findAll(){
         List<Alumno> result = alumnoRepository.findAll();
         if(result.isEmpty())
-            throw new EntityNotFoundException("No hay alumnos con esos criterios de busqueda");
+            throw new AlumnoNotFoundException("No se encontraron alumnos");
         return result;
     }
 
     public Alumno findById(Long id) {
         Optional<Alumno> result = alumnoRepository.findById(id);
         if(result.isEmpty())
-            throw new EntityNotFoundException("No se encontró alumno con ese id");
+            throw new AlumnoNotFoundException("No se encontró el alumno con id: " + id);
         else {
             return result.get();
         }

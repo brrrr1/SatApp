@@ -2,9 +2,7 @@ package com.salesianos.satapp.controller;
 
 import com.salesianos.satapp.dto.CreateCategoriaDto;
 import com.salesianos.satapp.dto.GetCategoriaDto;
-import com.salesianos.satapp.dto.GetIncidenciaDto;
 import com.salesianos.satapp.model.Categoria;
-import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.service.CategoriaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -16,7 +14,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -35,15 +32,177 @@ public class CategoriaController {
             @ApiResponse(responseCode = "200",
                     description = "Se han encontrado las categorías",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetCategoriaDto.class)),
                             examples = {@ExampleObject(
                                     value = """
-                                            {
-                                                    "nombre": "Electronica",
-                                                    "incidencias": [],
-                                                    "categoriaPadre": null,
+                                            [
+                                                {
+                                                    "id": 1,
+                                                    "nombre": "Informática",
+                                                    "nombreCategoriaPadre": null,
+                                                    "listaCategoriasHijas": [
+                                                        {
+                                                            "id": 201,
+                                                            "nombre": "Ordenadores",
+                                                            "listaCategoriasHijas": []
+                                                        },
+                                                        {
+                                                            "id": 251,
+                                                            "nombre": "Impresoras",
+                                                            "listaCategoriasHijas": []
+                                                        },
+                                                        {
+                                                            "id": 301,
+                                                            "nombre": "Proyectores",
+                                                            "listaCategoriasHijas": []
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "id": 51,
+                                                    "nombre": "Electrónica",
+                                                    "nombreCategoriaPadre": null,
+                                                    "listaCategoriasHijas": [
+                                                        {
+                                                            "id": 351,
+                                                            "nombre": "Cables",
+                                                            "listaCategoriasHijas": []
+                                                        },
+                                                        {
+                                                            "id": 401,
+                                                            "nombre": "Placas Base",
+                                                            "listaCategoriasHijas": []
+                                                        },
+                                                        {
+                                                            "id": 451,
+                                                            "nombre": "Pantallas",
+                                                            "listaCategoriasHijas": []
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "id": 101,
+                                                    "nombre": "Inmueble",
+                                                    "nombreCategoriaPadre": null,
+                                                    "listaCategoriasHijas": [
+                                                        {
+                                                            "id": 501,
+                                                            "nombre": "Mesas",
+                                                            "listaCategoriasHijas": []
+                                                        },
+                                                        {
+                                                            "id": 551,
+                                                            "nombre": "Sillas",
+                                                            "listaCategoriasHijas": []
+                                                        },
+                                                        {
+                                                            "id": 601,
+                                                            "nombre": "Pizarras",
+                                                            "listaCategoriasHijas": []
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "id": 151,
+                                                    "nombre": "Material Escolar",
+                                                    "nombreCategoriaPadre": null,
+                                                    "listaCategoriasHijas": [
+                                                        {
+                                                            "id": 651,
+                                                            "nombre": "Libros",
+                                                            "listaCategoriasHijas": []
+                                                        },
+                                                        {
+                                                            "id": 701,
+                                                            "nombre": "Cuadernos",
+                                                            "listaCategoriasHijas": []
+                                                        },
+                                                        {
+                                                            "id": 751,
+                                                            "nombre": "Bolígrafos",
+                                                            "listaCategoriasHijas": []
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "id": 201,
+                                                    "nombre": "Ordenadores",
+                                                    "nombreCategoriaPadre": "Informática",
                                                     "listaCategoriasHijas": []
-                                            }
+                                                },
+                                                {
+                                                    "id": 251,
+                                                    "nombre": "Impresoras",
+                                                    "nombreCategoriaPadre": "Informática",
+                                                    "listaCategoriasHijas": []
+                                                },
+                                                {
+                                                    "id": 301,
+                                                    "nombre": "Proyectores",
+                                                    "nombreCategoriaPadre": "Informática",
+                                                    "listaCategoriasHijas": []
+                                                },
+                                                {
+                                                    "id": 351,
+                                                    "nombre": "Cables",
+                                                    "nombreCategoriaPadre": "Electrónica",
+                                                    "listaCategoriasHijas": []
+                                                },
+                                                {
+                                                    "id": 401,
+                                                    "nombre": "Placas Base",
+                                                    "nombreCategoriaPadre": "Electrónica",
+                                                    "listaCategoriasHijas": []
+                                                },
+                                                {
+                                                    "id": 451,
+                                                    "nombre": "Pantallas",
+                                                    "nombreCategoriaPadre": "Electrónica",
+                                                    "listaCategoriasHijas": []
+                                                },
+                                                {
+                                                    "id": 501,
+                                                    "nombre": "Mesas",
+                                                    "nombreCategoriaPadre": "Inmueble",
+                                                    "listaCategoriasHijas": []
+                                                },
+                                                {
+                                                    "id": 551,
+                                                    "nombre": "Sillas",
+                                                    "nombreCategoriaPadre": "Inmueble",
+                                                    "listaCategoriasHijas": []
+                                                },
+                                                {
+                                                    "id": 601,
+                                                    "nombre": "Pizarras",
+                                                    "nombreCategoriaPadre": "Inmueble",
+                                                    "listaCategoriasHijas": []
+                                                },
+                                                {
+                                                    "id": 651,
+                                                    "nombre": "Libros",
+                                                    "nombreCategoriaPadre": "Material Escolar",
+                                                    "listaCategoriasHijas": []
+                                                },
+                                                {
+                                                    "id": 701,
+                                                    "nombre": "Cuadernos",
+                                                    "nombreCategoriaPadre": "Material Escolar",
+                                                    "listaCategoriasHijas": []
+                                                },
+                                                {
+                                                    "id": 751,
+                                                    "nombre": "Bolígrafos",
+                                                    "nombreCategoriaPadre": "Material Escolar",
+                                                    "listaCategoriasHijas": []
+                                                },
+                                                {
+                                                    "id": 752,
+                                                    "nombre": "Categoria 2",
+                                                    "nombreCategoriaPadre": null,
+                                                    "listaCategoriasHijas": []
+                                                }
+                                            ]
                                             """
                             )}
                     )}),
@@ -67,10 +226,26 @@ public class CategoriaController {
                             examples = {@ExampleObject(
                                     value = """
                                             {
-                                                    "nombre": "Electronica",
-                                                    "incidencias": [],
-                                                    "categoriaPadre": null,
-                                                    "listaCategoriasHijas": []
+                                                    "id": 151,
+                                                    "nombre": "Material Escolar",
+                                                    "nombreCategoriaPadre": null,
+                                                    "listaCategoriasHijas": [
+                                                        {
+                                                            "id": 651,
+                                                            "nombre": "Libros",
+                                                            "listaCategoriasHijas": []
+                                                        },
+                                                        {
+                                                            "id": 701,
+                                                            "nombre": "Cuadernos",
+                                                            "listaCategoriasHijas": []
+                                                        },
+                                                        {
+                                                            "id": 751,
+                                                            "nombre": "Bolígrafos",
+                                                            "listaCategoriasHijas": []
+                                                        }
+                                                    ]
                                             }
                                             """
                             )}
@@ -89,7 +264,7 @@ public class CategoriaController {
             @ApiResponse(responseCode = "201",
                     description = "Se ha creado la categoría",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetCategoriaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             {
@@ -105,8 +280,24 @@ public class CategoriaController {
                     description = "No se ha creado la categoría",
                     content = @Content),
     })
-    @PostMapping("/")
-    public ResponseEntity<Categoria> create(@RequestBody CreateCategoriaDto categoria) {
+    @PostMapping
+    public ResponseEntity<Categoria> create(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Cuerpo de la categoría", required = true,
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = CreateCategoriaDto.class),
+                            examples = @ExampleObject(value = """
+{
+    "nombre": "Informática",
+    "incidencias": [],
+    "categoriaPadre": {
+        "id": 1,
+        "nombre": "Electrónica"
+    },
+    "listaCategoriasHijas": []
+}
+""")))
+            @RequestBody CreateCategoriaDto categoria) {
         return ResponseEntity.status(HttpStatus.CREATED).body(categoriaService.save(categoria));
     }
 
@@ -115,7 +306,7 @@ public class CategoriaController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha editado la categoría",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetCategoriaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = Categoria.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             {
@@ -132,9 +323,23 @@ public class CategoriaController {
                     content = @Content),
     })
     @PutMapping("/{id}")
-    public ResponseEntity<Categoria> update(@PathVariable Long id, @RequestBody CreateCategoriaDto categoria) {
-        return ResponseEntity.status(HttpStatus.OK).body(categoriaService.update(id, categoria));
+    public ResponseEntity<Categoria> update(@PathVariable Long id,
+                                            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                                                    description = "Cuerpo de la categoría a editar", required = true,
+                                                    content = @Content(mediaType = "application/json",
+                                                            schema = @Schema(implementation = CreateCategoriaDto.class),
+                                                            examples = @ExampleObject(value = """
+    {
+        "id": 1,
+        "nombre": "Enchufes",
+        "categoriaPadreId": null,
+        "listaCategoriasHijasIds": []
     }
+    """)))
+                                            @RequestBody CreateCategoriaDto categoriaDto) {
+        return ResponseEntity.ok(categoriaService.update(id, categoriaDto));
+    }
+
 
     @Operation(summary = "Borra una categoría")
     @ApiResponses(value = {

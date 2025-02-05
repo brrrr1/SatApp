@@ -19,7 +19,7 @@ public class HistoricoCursos {
     private String curso;
 
     @ManyToOne
-    @JoinColumn(name = "usuario_id")
+    @JoinColumn(name = "alumno_id")
     private Alumno alumno;
 
 }

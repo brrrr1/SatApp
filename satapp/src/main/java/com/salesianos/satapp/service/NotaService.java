@@ -2,6 +2,7 @@ package com.salesianos.satapp.service;
 
 import com.salesianos.satapp.dto.CreateCategoriaDto;
 import com.salesianos.satapp.dto.CreateNotaDto;
+import com.salesianos.satapp.error.IncidenciaNotFoundException;
 import com.salesianos.satapp.error.NotaNotFoundException;
 import com.salesianos.satapp.model.Categoria;
 import com.salesianos.satapp.model.Incidencia;
@@ -41,7 +42,7 @@ public class NotaService {
     public Nota saveNota(Long incidenciaId, CreateNotaDto notaNueva) {
 
         Incidencia incidencia = incidenciaRepository.findById(incidenciaId)
-                .orElseThrow(() -> new NotaNotFoundException("No se ha encontrado una incidencia con ese id"));
+                .orElseThrow(() -> new IncidenciaNotFoundException("No se ha encontrado una incidencia con ese id"));
 
         Nota nota = Nota.builder()
                 .fecha(LocalDate.from(notaNueva.fecha()))

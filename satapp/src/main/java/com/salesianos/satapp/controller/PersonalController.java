@@ -1,8 +1,6 @@
 package com.salesianos.satapp.controller;
 
 import com.salesianos.satapp.dto.EditPersonalDto;
-import com.salesianos.satapp.dto.GetAlumnoDto;
-import com.salesianos.satapp.dto.GetIncidenciaDto;
 import com.salesianos.satapp.dto.GetPersonalDto;
 import com.salesianos.satapp.model.Personal;
 import com.salesianos.satapp.service.PersonalService;
@@ -31,25 +29,29 @@ public class PersonalController {
             @ApiResponse(responseCode = "200",
                     description = "Se han encontrado los miembros del personal",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetAlumnoDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetPersonalDto.class)),
                             examples = {@ExampleObject(
                                     value = """
                                             [
-                                                 {
-                                                     "nombre": "Cristiano Ronaldo",
-                                                     "username": "cr7",
-                                                     "email": "cr7@triana.salesianos.com",
-                                                     "password": "password123",
-                                                     "role": "PERSONAL",
-                                                 },
-                                                 {
-                                                     "nombre": "Cristiano Ronaldo",
-                                                     "username": "cr7",
-                                                     "email": "cr7@triana.salesianos.com",
-                                                     "password": "password123",
-                                                     "role": "PERSONAL",        
-                                                 }
-                                             ]
+                                                  {
+                                                      "id": 451,
+                                                      "nombre": "Pepe Segura",
+                                                      "username": "pepseg",
+                                                      "password": "passwordpepseg",
+                                                      "email": "pepe.segura@gmail.com",
+                                                      "role": "ADMIN",
+                                                      "tipo": "PROFESOR"
+                                                  },
+                                                  {
+                                                      "id": 551,
+                                                      "nombre": "Pablo Tey",
+                                                      "username": "pabtey",
+                                                      "password": "passwordpabtey",
+                                                      "email": "pablo.tey@gmail.com",
+                                                      "role": "ADMIN",
+                                                      "tipo": "PAS"
+                                                  }
+                                              ]
                                             """
                             )}
                     )}),
@@ -68,16 +70,18 @@ public class PersonalController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha encontrado el miembro del personal",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetPersonalDto.class)),
                             examples = {@ExampleObject(
                                     value = """
-                                          {
-                                            "nombre": "Cristiano Ronaldo",
-                                            "username": "cr7",
-                                            "email": "cr7@triana.salesianos.com",
-                                            "password": "password123",
-                                            "role": "PROFESOR",
-                                           }
+                                            {
+                                                    "id": 451,
+                                                    "nombre": "Pepe Segura",
+                                                    "username": "pepseg",
+                                                    "password": "passwordpepseg",
+                                                    "email": "pepe.segura@gmail.com",
+                                                    "role": "ADMIN",
+                                                    "tipo": "PROFESOR"
+                                                }
                                             """
                             )}
                     )}),
@@ -95,8 +99,20 @@ public class PersonalController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha creado el miembro del personal",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetPersonalDto.class)),
                             examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": 602,
+                                                "nombre": Miguel,
+                                                "username": "miguelcamposdev",
+                                                "password": "1234",
+                                                "email": "miguelcampos@gmail.com",
+                                                "role": "PERSONAL",
+                                                "tipo": "PROFESOR"
+                                            }
+                                            """
+
                             )}
                     )}),
             @ApiResponse(responseCode = "404",
@@ -104,7 +120,22 @@ public class PersonalController {
                     content = @Content),
     })
     @PostMapping()
-    public GetPersonalDto savePersonal(@RequestBody EditPersonalDto personalNuevo) {
+    public GetPersonalDto savePersonal(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Cuerpo del miembro del personal a crear", required = true,
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = EditPersonalDto.class),
+                            examples = @ExampleObject(value = """
+    {
+                                            "nombre": "Miguel",
+                                            "username": "miguelcamposdev",
+                                            "password": "1234",
+                                            "email": "miguelcampos@gmail.com",
+                                            "role": "PERSONAL",
+                                            "tipo": "PROFESOR"
+                                        }
+""")))
+            @RequestBody EditPersonalDto personalNuevo) {
         Personal personal =  personalService.savePersonal(personalNuevo);
         return GetPersonalDto.of(personal);
     }

@@ -1,0 +1,1028 @@
+{
+	"info": {
+		"_postman_id": "af86c9e9-45f8-41f6-afc7-50fe0ef96de7",
+		"name": "SatApp",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38617670",
+		"_collection_link": "https://satapp-bruno-moiss.postman.co/workspace/SatApp-Bruno-Mois%C3%A9s-Workspace~1813d32a-fe64-4226-b6f7-20f01197d934/collection/38617679-af86c9e9-45f8-41f6-afc7-50fe0ef96de7?action=share&source=collection_link&creator=38617670"
+	},
+	"item": [
+		{
+			"name": "ubicacion",
+			"item": [
+				{
+					"name": "allUbi",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/ubicacion/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ubicacion",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createUbi",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Sala de profesores\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ubicacion/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ubicacion",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateUbi",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Aula 2DAM\",\r\n    \"equipos\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/ubicacion/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ubicacion",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteUbi",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/ubicacion/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"ubicacion",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "equipo",
+			"item": [
+				{
+					"name": "allEquipo",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/equipo/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"equipo",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createEquipo",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Aire Acondicionado\",\r\n    \"caracteristicas\": \"Aire Acondicionado del 2004\",\r\n    \"ubicacion\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Sala de profesores\"\r\n    },\r\n    \"incidencias\": [\r\n        \r\n    ] \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/equipo/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"equipo",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteEquipo",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/equipo/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"equipo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateEquipo",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"Aire Acondicionado\",\r\n    \"caracteristicas\": \"Aire Acondicionado del 2025\",\r\n    \"ubicacion\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Sala de profesores\"\r\n    },\r\n    \"incidencias\": [\r\n        \r\n    ] \r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/equipo/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"equipo",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "usuario",
+			"item": [
+				{
+					"name": "allUsuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuario/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crearUsuario",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Cristiano Ronaldo\",\r\n    \"username\": \"cr7\",\r\n    \"password\": \"password123\",\r\n    \"role\": \"ALUMNO\",\r\n    \"email\": \"cr7@triana.salesianos.com\"\r\n}   ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/usuario/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "usuarioPorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuario/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editarUsuario",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nombre\": \"Cristiano Messi\",\r\n    \"username\": \"cr7\",\r\n    \"password\": \"password123\",\r\n    \"email\": \"cr7@triana.salesianos.com\",\r\n    \"role\": \"ALUMNO\",\r\n    \"incidencias\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/usuario/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "borrarUsuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/usuario/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"usuario",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "alumno",
+			"item": [
+				{
+					"name": "crearAlumno",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Cristiano Ronaldo\",\r\n    \"username\": \"cr7\",\r\n    \"email\": \"cr7@triana.salesianos.com\",\r\n    \"password\": \"password123\",\r\n    \"role\": \"ALUMNO\",\r\n    \"historicoCursos\": [\r\n        {\r\n            \"curso\": \"22/23\",\r\n            \"cursoEscolar\": \"2ºESO\"\r\n        }\r\n    ]\r\n}   ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/alumno/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"alumno",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allAlumnos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/alumno/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"alumno",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crearHistoricoCursosDeUnAlumno",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"curso\": \"22/23\",\r\n    \"cursoEscolar\": \"2ºESO\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/alumno/1/historico",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"alumno",
+								"1",
+								"historico"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAlumno",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/alumno/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"alumno",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "editarAlumno",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"nombre\": \"Messi\",\r\n        \"username\": \"cr7\",\r\n        \"email\": \"cr7@triana.salesianos.com\",\r\n        \"password\": \"password123\",\r\n        \"role\": \"ALUMNO\",\r\n        \"historicoCursos\": []\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/alumno/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"alumno",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "borrarAlumno",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/alumno/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"alumno",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tecnico",
+			"item": [
+				{
+					"name": "crearTecnico",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Messi\",\r\n    \"username\": \"leomessi10\",\r\n    \"password\": \"3443\",\r\n    \"email\": \"messi@gmail.com\",\r\n    \"role\": \"PERSONAL\",\r\n    \"Tipo\": \"PROFESOR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/tecnico/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tecnico",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allTecnicos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/tecnico/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tecnico",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tecnicoPorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/tecnico/51",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"tecnico",
+								"51"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "personal",
+			"item": [
+				{
+					"name": "allPersonal",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/personal/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personal",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "personalPorId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/personal/451",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personal",
+								"451"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "crearMiembroPersonal",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Miguel\",\r\n    \"username\": \"miguelcamposdev\",\r\n    \"password\": \"1234\",\r\n    \"email\": \"miguelcampos@gmail.com\",\r\n    \"role\": \"PERSONAL\",\r\n    \"tipo\": \"PROFESOR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/personal/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"personal",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categoria",
+			"item": [
+				{
+					"name": "allCategorias",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/categoria/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categoria",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createCategoria",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nombre\": \"Categoria 2\",\r\n        \"incidencias\": [\r\n\r\n        ],\r\n        \"categoriaPadre\": null,\r\n        \"listaCategoriasHijas\": [\r\n        ]\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/categoria/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categoria",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteCategoria",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/categoria/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categoria",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createSubCategoria",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"Informática\",\r\n    \"incidencias\": [],\r\n    \"categoriaPadre\": {\r\n        \"id\": 1,\r\n        \"nombre\": \"Electrónica\"\r\n    },\r\n    \"listaCategoriasHijas\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/categoria/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categoria",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateCategoria",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"id\": 1,\r\n        \"nombre\": \"Enchufes\",\r\n        \"nombreCategoriaPadre\": [],\r\n        \"listaCategoriasHijas\": []\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/categoria/751",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"categoria",
+								"751"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "incidencia",
+			"item": [
+				{
+					"name": "createIncidencia",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"fecha\": \"2025-02-04T10:33:33\",\r\n        \"titulo\": \"Rotura del ordenador de Bruno Delgado\",\r\n        \"descripcion\": \"Es muy torpe y ha roto su ordenador\",\r\n        \"estado\": \"ABIERTA\",\r\n        \"urgencia\": \"Urgente\",\r\n        \"usuario\": {\r\n            \"id\": 1\r\n        },\r\n        \"categoria\": {\r\n            \"id\": 251,\r\n            \"nombre\": \"Impresoras\",\r\n            \"nombreCategoriaPadre\": \"Informática\",\r\n            \"listaCategoriasHijas\": []\r\n        },\r\n        \"equipo\": {\r\n            \"id\": 1,\r\n            \"nombre\": \"Pc Profesor\",\r\n            \"caracteristicas\": \"Rotura de pantalla\"\r\n        },\r\n        \"ubicacion\": {\r\n            \"id\": 1,\r\n            \"nombre\": \"Aula 1ºDAM\"\r\n        },\r\n        \"nota\":{\r\n            \"id\": 1\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/incidencia/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"incidencia",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "allIncidencia",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/incidencia/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"incidencia",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateIncidencia",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"fecha\": \"2025-02-04T10:33:33\",\r\n        \"titulo\": \"Rotura del ordenador de Bruno Delgado\",\r\n        \"descripcion\": \"Es muy torpe y ha roto su ordenador\",\r\n        \"estado\": \"ABIERTA\",\r\n        \"urgencia\": \"Urgente\",\r\n        \"usuario\": {\r\n            \"id\": 1\r\n        },\r\n        \"categoria\": {\r\n            \"id\": 251,\r\n            \"nombre\": \"Impresoras\",\r\n            \"nombreCategoriaPadre\": \"Informática\",\r\n            \"listaCategoriasHijas\": []\r\n        },\r\n        \"equipo\": {\r\n            \"id\": 1,\r\n            \"nombre\": \"Pc Profesor\",\r\n            \"caracteristicas\": \"Rotura de pantalla\"\r\n        },\r\n        \"ubicacion\": {\r\n            \"id\": 1,\r\n            \"nombre\": \"Aula 1ºDAM\"\r\n        },\r\n        \"notas\": [\r\n            {\r\n                \"incidenciaId\": 1,\r\n                \"fecha\": \"2024-02-03\",\r\n                \"contenido\": \"Se ha roto la pantalla del profesor, pinta feo\",\r\n                \"autor\": \"Moisés Dorado\"\r\n            }\r\n        ]\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/incidencia/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"incidencia",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteIncidencia",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/incidencia/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"incidencia",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "idIncidencia",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/incidencia/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"incidencia",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "buscarIncidenciaPorFecha",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/incidencia/filtrar?startDate=2021-01-01T00:00:00&endDate=2023-02-05T23:59:59",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"incidencia",
+								"filtrar"
+							],
+							"query": [
+								{
+									"key": "startDate",
+									"value": "2021-01-01T00:00:00"
+								},
+								{
+									"key": "endDate",
+									"value": "2023-02-05T23:59:59"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "incidenciasDeAlumno",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/incidencia/1/incidencias",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"incidencia",
+								"1",
+								"incidencias"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "nota",
+			"item": [
+				{
+					"name": "allNotas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/nota/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"nota",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createNotas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fecha\": \"2024-02-03T12:00:00\",\r\n    \"contenido\": \"Se ha roto por el lado más cercano a la puerta\",\r\n    \"autor\": \"Manolo Lama\",\r\n    \"incidencia\": {\r\n        \"id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/nota/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"nota",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateNotas",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"fecha\": \"2024-02-03T12:00:00\",\r\n    \"contenido\": \"Se ha roto por el lado más cercano a la puerta\",\r\n    \"autor\": \"Mrs Margareth\",\r\n    \"incidencia\": {\r\n        \"id\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/nota/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"nota",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

@@ -3,9 +3,7 @@ package com.salesianos.satapp.controller;
 import com.salesianos.satapp.dto.*;
 import com.salesianos.satapp.model.Alumno;
 import com.salesianos.satapp.model.HistoricoCursos;
-import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.service.AlumnoService;
-import com.salesianos.satapp.service.UsuarioService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -37,23 +35,106 @@ public class AlumnoController {
                             examples = {@ExampleObject(
                                     value = """
                                             [
-                                                 {
-                                                     "nombre": "Cristiano Ronaldo",
-                                                     "username": "cr7",
-                                                     "email": "cr7@triana.salesianos.com",
-                                                     "password": "password123",
-                                                     "role": "ALUMNO",
-                                                     "historicoCursos": []
-                                                 },
-                                                 {
-                                                               "nombre": "Bruno Delgado",
-                                                               "username": "br1",
-                                                               "email": "delgado.hebru24@triana.salesianos.com",
-                                                               "password": "777890",
-                                                               "role": "ALUMNO",
-                                                               "historicoCursos": []
-                                                 }
-                                             ]
+                                                {
+                                                    "nombre": "Moisés Dorado",
+                                                    "username": "moidor",
+                                                    "email": "moi.dor@gmail.com",
+                                                    "password": "passwordmoidor",
+                                                    "role": "USER",
+                                                    "historicoCursos": [
+                                                        {
+                                                            "curso": "1º",
+                                                            "cursoEscolar": "2019-2020"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "nombre": "Carlos Roman",
+                                                    "username": "carrom",
+                                                    "email": "carlos.roman@gmail.com",
+                                                    "password": "passwordcarrom",
+                                                    "role": "USER",
+                                                    "historicoCursos": [
+                                                        {
+                                                            "curso": "2º",
+                                                            "cursoEscolar": "2019-2020"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "nombre": "Manuel Maman",
+                                                    "username": "manmam",
+                                                    "email": "manuel.maman@gmail.com",
+                                                    "password": "passwordmanmam",
+                                                    "role": "USER",
+                                                    "historicoCursos": [
+                                                        {
+                                                            "curso": "1º",
+                                                            "cursoEscolar": "2019-2020"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "nombre": "Carlos Ruiz",
+                                                    "username": "carrui",
+                                                    "email": "carlos.ruiz@gmail.com",
+                                                    "password": "passwordcarrui",
+                                                    "role": "USER",
+                                                    "historicoCursos": [
+                                                        {
+                                                            "curso": "2º",
+                                                            "cursoEscolar": "2019-2020"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "nombre": "Pablo Camara",
+                                                    "username": "pabcam",
+                                                    "email": "pablo.camara@gmail.com",
+                                                    "password": "passwordpabcam",
+                                                    "role": "USER",
+                                                    "historicoCursos": [
+                                                        {
+                                                            "curso": "1º",
+                                                            "cursoEscolar": "2020-2021"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "nombre": "Pedro Sanchez",
+                                                    "username": "pedsan",
+                                                    "email": "pedro.sanchez@gmail.com",
+                                                    "password": "passwordpedsan",
+                                                    "role": "USER",
+                                                    "historicoCursos": [
+                                                        {
+                                                            "curso": "2º",
+                                                            "cursoEscolar": "2020-2021"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "nombre": "Alvaro Castilla",
+                                                    "username": "alvcas",
+                                                    "email": "alvaro.castilla@gmail.com",
+                                                    "password": "passwordalvcas",
+                                                    "role": "USER",
+                                                    "historicoCursos": [
+                                                        {
+                                                            "curso": "1º",
+                                                            "cursoEscolar": "2020-2021"
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    "nombre": "Cristiano Ronaldo",
+                                                    "username": "cr7",
+                                                    "email": "cr7@triana.salesianos.com",
+                                                    "password": "password123",
+                                                    "role": "ALUMNO",
+                                                    "historicoCursos": []
+                                                }
+                                            ]
                                             """
                             )}
                     )}),
@@ -73,17 +154,22 @@ public class AlumnoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha encontrado el alumno",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetAlumnoDto.class)),
                             examples = {@ExampleObject(
                                     value = """
                                           {
-                                            "nombre": "Cristiano Ronaldo",
-                                            "username": "cr7",
-                                            "email": "cr7@triana.salesianos.com",
-                                            "password": "password123",
-                                            "role": "ALUMNO",
-                                            "historicoCursos": []
-                                           }
+                                                    "nombre": "Pablo Camara",
+                                                    "username": "pabcam",
+                                                    "email": "pablo.camara@gmail.com",
+                                                    "password": "passwordpabcam",
+                                                    "role": "USER",
+                                                    "historicoCursos": [
+                                                        {
+                                                            "curso": "1º",
+                                                            "cursoEscolar": "2020-2021"
+                                                        }
+                                                    ]
+                                          }
                                             """
                             )}
                     )}),
@@ -101,7 +187,7 @@ public class AlumnoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha creado el alumno",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetAlumnoDto.class)),
                             examples = {@ExampleObject(
                                     value = """
                                                  {
@@ -121,7 +207,24 @@ public class AlumnoController {
                     content = @Content),
     })
     @PostMapping
-    public GetAlumnoDto saveAlumno(@RequestBody EditAlumnoDto alumnoNuevo) {
+    public GetAlumnoDto saveAlumno(
+
+
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Cuerpo del alumno a crear", required = true,
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = EditAlumnoDto.class),
+                            examples = @ExampleObject(value = """
+    {
+        "nombre": "Messi",
+        "username": "cr7",
+        "email": "cr7@triana.salesianos.com",
+        "password": "password123",
+        "role": "ALUMNO",
+        "historicoCursos": []
+    }
+""")))
+            @RequestBody EditAlumnoDto alumnoNuevo) {
         Alumno alumno = alumnoService.saveAlumno(alumnoNuevo);
         return GetAlumnoDto.of(alumno);
     }
@@ -131,7 +234,7 @@ public class AlumnoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha editado el alumno",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = Incidencia.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetAlumnoDto.class)),
                             examples = {@ExampleObject(
 
                             )}
@@ -141,7 +244,22 @@ public class AlumnoController {
                     content = @Content),
     })
     @PutMapping("/{id}")
-    public GetAlumnoDto update(@PathVariable Long id, @RequestBody EditAlumnoDto alumnoActualizado) {
+    public GetAlumnoDto update(@PathVariable Long id,
+                               @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                                       description = "Cuerpo del alumno a editar", required = true,
+                                       content = @Content(mediaType = "application/json",
+                                               schema = @Schema(implementation = EditAlumnoDto.class),
+                                               examples = @ExampleObject(value = """
+    {
+        "nombre": "Messi",
+        "username": "cr7",
+        "email": "cr7@triana.salesianos.com",
+        "password": "password123",
+        "role": "ALUMNO",
+        "historicoCursos": []
+    }
+""")))
+                               @RequestBody EditAlumnoDto alumnoActualizado) {
         Alumno alumno = alumnoService.editAlumno(id, alumnoActualizado);
         return GetAlumnoDto.of(alumno);
     }
@@ -151,7 +269,7 @@ public class AlumnoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha creado el histórico de cursos del alumno",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetHistoricoCursosDto.class)),
                             examples = {@ExampleObject(
                             )}
                     )}),
@@ -160,7 +278,18 @@ public class AlumnoController {
                     content = @Content),
     })
     @PostMapping("/{alumnoId}/historico")
-    public GetHistoricoCursosDto saveHistoricoCurso(@PathVariable Long alumnoId, @RequestBody EditHistoricoCursosDto historicoDto){
+    public GetHistoricoCursosDto saveHistoricoCurso(@PathVariable Long alumnoId,
+                                                    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                                                            description = "Cuerpo del histórico", required = true,
+                                                            content = @Content(mediaType = "application/json",
+                                                                    schema = @Schema(implementation = EditHistoricoCursosDto.class),
+                                                                    examples = @ExampleObject(value = """
+{
+    "curso": "22/23",
+    "cursoEscolar": "2ºESO"
+}
+""")))
+                                                    @RequestBody EditHistoricoCursosDto historicoDto){
         HistoricoCursos historicoCursos = alumnoService.saveHistoricoCurso(alumnoId, historicoDto);
 
         return GetHistoricoCursosDto.of(historicoCursos);
@@ -171,7 +300,7 @@ public class AlumnoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha eliminado el alumno",
                     content = {@Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = Incidencia.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = Alumno.class)),
                             examples = {@ExampleObject(
 
                             )}
@@ -181,7 +310,7 @@ public class AlumnoController {
                     content = @Content),
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         alumnoService.delete(id);
         return ResponseEntity.noContent().build();
     }

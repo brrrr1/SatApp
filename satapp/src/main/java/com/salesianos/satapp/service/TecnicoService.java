@@ -2,6 +2,8 @@ package com.salesianos.satapp.service;
 
 import com.salesianos.satapp.dto.EditIncidenciaDto;
 import com.salesianos.satapp.dto.EditTecnicoDto;
+import com.salesianos.satapp.error.IncidenciaNotFoundException;
+import com.salesianos.satapp.error.TecnicoNotFoundException;
 import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.model.Tecnico;
 import com.salesianos.satapp.repository.IncidenciaRepository;
@@ -23,14 +25,14 @@ public class TecnicoService {
     public List<Tecnico> findAll(){
         List<Tecnico> result = tecnicoRepository.findAll();
         if(result.isEmpty())
-            throw new EntityNotFoundException("No hay tecnicos con esos criterios de busqueda");
+            throw new TecnicoNotFoundException("No se encontraron técnicos");
         return result;
     }
 
     public Tecnico findById(Long id) {
         Optional<Tecnico> result = tecnicoRepository.findById(id);
         if(result.isEmpty())
-            throw new EntityNotFoundException("No se encontró técnico con ese id");
+            throw new TecnicoNotFoundException("No se ha encontrado el técnico con id: " + id);
         else {
             return result.get();
         }
@@ -52,14 +54,14 @@ public class TecnicoService {
                     old.setEstado(incidenciaDto.estado());
                     return incidenciaRepository.save(old);
                 })
-                .orElseThrow(() -> new EntityNotFoundException("No hay producto con ID: "+ incidenciaId));
+                .orElseThrow(() -> new IncidenciaNotFoundException("No se ha encontrado ninguna incidencia con ese id"));
 
 
     }
 
 
-    public void delete(Long id) {
+    /*public void delete(Long id) {
         tecnicoRepository.deleteById(id);
-    }
+    }*/
 
 }

@@ -1,7 +1,6 @@
 package com.salesianos.satapp.controller;
 
 import com.salesianos.satapp.dto.*;
-import com.salesianos.satapp.model.Categoria;
 import com.salesianos.satapp.model.Ubicacion;
 import com.salesianos.satapp.service.UbicacionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,7 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/ubicacion/")
@@ -47,10 +45,8 @@ public class UbicacionController {
                     content = @Content),
     })
     @GetMapping
-    public List<GetUbicacionDto> findAll() {
-        return ubicacionService.findAll().stream()
-                .map(GetUbicacionDto::of)
-                .collect(Collectors.toList());
+    public List<GetUbicacionDto> getAll() {
+        return ubicacionService.findAll().stream().map(GetUbicacionDto::of).toList();
     }
 
     @Operation(summary = "Obtiene una ubicación")
@@ -72,10 +68,8 @@ public class UbicacionController {
                     content = @Content),
     })
     @GetMapping("/{id}")
-    public ResponseEntity<GetUbicacionDto> findById(@PathVariable Long id) {
-        return ubicacionService.findById(id)
-                .map(ubicacion -> ResponseEntity.ok(GetUbicacionDto.of(ubicacion)))
-                .orElseGet(() -> ResponseEntity.notFound().build());
+    public GetUbicacionDto getById(@PathVariable Long id) {
+        return GetUbicacionDto.of(ubicacionService.findById(id).get());
     }
 
     @Operation(summary = "Crea una ubicación")
@@ -97,8 +91,8 @@ public class UbicacionController {
                     content = @Content),
     })
     @PostMapping
-    public ResponseEntity<GetUbicacionDto> create(@RequestBody CreateUbicacionDto createUbicacionDto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(GetUbicacionDto.of(ubicacionService.save(createUbicacionDto)));
+    public ResponseEntity<GetUbicacionDto> saveUbicacion(@RequestBody GetUbicacionDto nuevo) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(GetUbicacionDto.of(ubicacionService.saveUbicacion(nuevo)));
     }
 
     @Operation(summary = "Edita una ubicación")
@@ -110,7 +104,8 @@ public class UbicacionController {
                             examples = {@ExampleObject(
                                     value = """
                                             {
-                                                "nombre": "Sala de reuniones"
+                                                "id": 1,
+                                                "nombre": "Aula 2DAM"
                                             }
                                             """
                             )}
@@ -120,8 +115,19 @@ public class UbicacionController {
                     content = @Content),
     })
     @PutMapping("/{id}")
-    public ResponseEntity<GetUbicacionDto> update(@PathVariable Long id, @RequestBody Ubicacion ubicacionActualizada) {
-        return ResponseEntity.status(HttpStatus.OK).body(GetUbicacionDto.of(ubicacionService.update(id, ubicacionActualizada)));
+    public ResponseEntity<GetUbicacionDto> update(@PathVariable Long id,
+                                                  @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                                                          description = "Cuerpo de la nota a editar", required = true,
+                                                          content = @Content(mediaType = "application/json",
+                                                                  schema = @Schema(implementation = GetUbicacionDto.class),
+                                                                  examples = @ExampleObject(value = """
+                                                                {
+                                                                                  "nombre": "Aula 2DAM",
+                                                                                  "equipos": []
+                                                                              }
+""")))
+                                                  @RequestBody Ubicacion ubicacionActualizada) {
+        return ResponseEntity.status(HttpStatus.OK).body(GetUbicacionDto.of(ubicacionService.editUbicacion(id, GetUbicacionDto.of(ubicacionActualizada))));
     }
 
     @Operation(summary = "Borra una ubicación")
@@ -136,8 +142,8 @@ public class UbicacionController {
                     content = @Content),
     })
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        ubicacionService.deleteById(id);
+    public ResponseEntity<?> deleteUbicacion(@PathVariable Long id) {
+        ubicacionService.deleteUbicacion(id);
         return ResponseEntity.noContent().build();
     }
 }

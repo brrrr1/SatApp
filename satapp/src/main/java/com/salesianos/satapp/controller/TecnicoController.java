@@ -1,10 +1,8 @@
 package com.salesianos.satapp.controller;
 
-import com.salesianos.satapp.dto.EditIncidenciaDto;
 import com.salesianos.satapp.dto.EditTecnicoDto;
 import com.salesianos.satapp.dto.GetIncidenciaDto;
 import com.salesianos.satapp.dto.GetTecnicoDto;
-import com.salesianos.satapp.model.Incidencia;
 import com.salesianos.satapp.model.Tecnico;
 import com.salesianos.satapp.service.IncidenciaService;
 import com.salesianos.satapp.service.TecnicoService;
@@ -17,7 +15,6 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -38,26 +35,44 @@ public class TecnicoController {
                             array = @ArraySchema(schema = @Schema(implementation = GetTecnicoDto.class)),
                             examples = {@ExampleObject(
                                     value = """
-                                    [
-                                            {
-                                                "id": 1,
-                                                "nombre": "Messi",
-                                                "username": "leomessi10",
-                                                "password": "3443",
-                                                "email": "messi@gmail.com",
-                                                "role": "PERSONAL",
-                                                "incidencias": []
-                                            },
-                                            {
-                                                "id": 2,
-                                                "nombre": "Messi",
-                                                "username": "leomessi102",
-                                                "password": "3443",
-                                                "email": "messi2@gmail.com",
-                                                "role": "PERSONAL",
-                                                "incidencias": []
-                                            }
-                                    ]
+                                            [
+                                                 {
+                                                     "id": 51,
+                                                     "nombre": "Bruno Delgado",
+                                                     "username": "brudel",
+                                                     "password": "passwordbrudel",
+                                                     "email": "bruno.delgado@gmail.com",
+                                                     "role": "ADMIN",
+                                                     "incidencias": []
+                                                 },
+                                                 {
+                                                     "id": 151,
+                                                     "nombre": "Joaquin Carrascal",
+                                                     "username": "joacar",
+                                                     "password": "passwordjoacar",
+                                                     "email": "joaquin.carrascal@gmail.com",
+                                                     "role": "ADMIN",
+                                                     "incidencias": []
+                                                 },
+                                                 {
+                                                     "id": 251,
+                                                     "nombre": "Victor Levic",
+                                                     "username": "viclev",
+                                                     "password": "passwordviclev",
+                                                     "email": "victor.levic@gmail.com",
+                                                     "role": "ADMIN",
+                                                     "incidencias": []
+                                                 },
+                                                 {
+                                                     "id": 351,
+                                                     "nombre": "Rafa Hernandez",
+                                                     "username": "rafher",
+                                                     "password": "passwordrafher",
+                                                     "email": "rafa.hernandez@gmail.com",
+                                                     "role": "ADMIN",
+                                                     "incidencias": []
+                                                 }
+                                             ]
                                             """
                             )}
                     )}),
@@ -79,25 +94,15 @@ public class TecnicoController {
                             array = @ArraySchema(schema = @Schema(implementation = GetTecnicoDto.class)),
                             examples = {@ExampleObject(
                                     value = """
-                                            [
                                             {
-                                                "id": 1,
-                                                "nombre": "Messi",
-                                                "username": "leomessi10",
-                                                "password": "3443",
-                                                "email": "messi@gmail.com",
-                                                "role": "PERSONAL",
-                                                "incidencias": []
-                                            },
-                                            {
-                                                "id": 2,
-                                                "nombre": "Messi",
-                                                "username": "leomessi102",
-                                                "password": "3443",
-                                                "email": "messi2@gmail.com",
-                                                "role": "PERSONAL",
-                                                "incidencias": []
-                                            }
+                                                 "id": 51,
+                                                 "nombre": "Bruno Delgado",
+                                                 "username": "brudel",
+                                                 "password": "passwordbrudel",
+                                                 "email": "bruno.delgado@gmail.com",
+                                                 "role": "ADMIN",
+                                                 "incidencias": []
+                                             }
                                             """
                             )}
                     )}),
@@ -115,8 +120,19 @@ public class TecnicoController {
             @ApiResponse(responseCode = "200",
                     description = "Se ha creado el técnico",
                     content = { @Content(mediaType = "application/json",
-                            array = @ArraySchema(schema = @Schema(implementation = GetIncidenciaDto.class)),
+                            array = @ArraySchema(schema = @Schema(implementation = GetTecnicoDto.class)),
                             examples = {@ExampleObject(
+                                    value = """
+                                            {
+                                                "id": 603,
+                                                "nombre": "Messi",
+                                                "username": "leomessi10",
+                                                "password": "3443",
+                                                "email": "messi@gmail.com",
+                                                "role": "PERSONAL",
+                                                "incidencias": []
+                                            }
+                                            """
                             )}
                     )}),
             @ApiResponse(responseCode = "404",
@@ -124,12 +140,27 @@ public class TecnicoController {
                     content = @Content),
     })
     @PostMapping
-    public GetTecnicoDto saveTecnico(@RequestBody EditTecnicoDto tecnicoNuevo) {
+    public GetTecnicoDto saveTecnico(
+            @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Cuerpo del técnico a crear", required = true,
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = EditTecnicoDto.class),
+                            examples = @ExampleObject(value = """
+    {
+                                            "nombre": "Messi",
+                                            "username": "leomessi10",
+                                            "password": "3443",
+                                            "email": "messi@gmail.com",
+                                            "role": "PERSONAL",
+                                            "Tipo": "PROFESOR"
+                                        }
+""")))
+            @RequestBody EditTecnicoDto tecnicoNuevo) {
         Tecnico tecnico =  tecnicoService.saveTecnico(tecnicoNuevo);
         return GetTecnicoDto.of(tecnico);
     }
 
-    @Operation(summary = "Edita una incidencia")
+    /*@Operation(summary = "Edita una incidencia")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200",
                     description = "Se ha editado la incidencia",
@@ -151,6 +182,6 @@ public class TecnicoController {
         Incidencia incidencia = tecnicoService.gestionarIncidencia(incidenciaId, incidenciaDto);
 
         return ResponseEntity.ok(incidencia);
-    }
+    }*/
 
 }
